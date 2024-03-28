@@ -59,11 +59,19 @@ export class CloackerUtils {
 
     validarIdiomasPermitidos(req: Request) {
         const body = req.body
-        const idioma = body['idioma']
-        if (!idioma || idioma === 'pt-BR') {
+        const idiomas = body['idiomas']
+        if (!idiomas || idiomas.length === 0) {
             this.errors.push({
                 errorCode: 5,
                 msg: 'Idioma inválido'
+            })
+            return false
+        }
+        const idiomasString = idiomas.join(', ').toLowerCase()
+        if (idiomasString.includes('pt')) {
+            this.errors.push({
+                errorCode: 5,
+                msg: 'Idioma Não Permitido'
             })
             return false
         }
