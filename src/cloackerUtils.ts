@@ -30,6 +30,7 @@ export class CloackerUtils {
                 errorCode: 2,
                 msg: 'Src inexistente'
             })
+            return false
         }
         if (src.includes('c22-bac512'))
             return true
