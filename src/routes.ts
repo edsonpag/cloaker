@@ -3,6 +3,6 @@ import { CloackerController } from './cloackerController';
 
 const router = Router()
 
-router.get('/', new CloackerController().main);
+router.post('/', new CloackerController().main);
 
 export default router
