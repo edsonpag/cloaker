@@ -24,7 +24,13 @@ export class CloackerUtils {
 
     validarParametrosDaUrl(req: Request) {
         const body = req.body
-        const src = body['src']
+        const src = body['a']
+        if (!src) {
+            this.errors.push({
+                errorCode: 2,
+                msg: 'Src inexistente'
+            })
+        }
         if (src.includes('c22-bac512'))
             return true
         else {
@@ -38,7 +44,7 @@ export class CloackerUtils {
 
     validarReferencia(req: Request) {
         const body = req.body
-        let referencia: string = body['referencia']
+        let referencia: string = body['b']
         if (!referencia) {
             this.errors.push({
                 errorCode: 3,
@@ -59,7 +65,7 @@ export class CloackerUtils {
 
     validarIdiomasPermitidos(req: Request) {
         const body = req.body
-        const idiomas = body['idiomas']
+        const idiomas = body['c']
         if (!idiomas || idiomas.length === 0) {
             this.errors.push({
                 errorCode: 5,
