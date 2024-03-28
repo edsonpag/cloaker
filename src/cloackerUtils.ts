@@ -25,7 +25,7 @@ export class CloackerUtils {
     validarParametrosDaUrl(req: Request) {
         const body = req.body
         const src = body['src']
-        if (src === 'c22-bac512')
+        if (src.includes('c22-bac512'))
             return true
         else {
             this.errors.push({
