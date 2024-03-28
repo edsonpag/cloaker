@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CloackerUtils } from "./cloackerUtils";
+import { CloackerUtils } from "../utils/cloackerUtils";
 
 export class CloackerController {
 
@@ -9,9 +9,7 @@ export class CloackerController {
         cloackerUtils.validarParametrosDaUrl(req)
         cloackerUtils.validarReferencia(req)
         cloackerUtils.validarIdiomasPermitidos(req)
-        if (cloackerUtils.errors.length > 0) {
-            return
-        }
+        cloackerUtils.montarResposta(res)
         return
     }
 }

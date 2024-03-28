@@ -1,13 +1,11 @@
-import { Request } from "express"
-
-interface Error {
-    errorCode: number
-    msg: String
-}
+import { Request, Response } from "express"
+import { CloackerError } from "../interfaces/cloackerError.interface"
+import { responseA } from "../responses/a"
+import { responseB } from "../responses/b"
 
 export class CloackerUtils {
 
-    errors: Error[] = []
+    errors: CloackerError[] = []
 
     validarDispositivoMobile(req: Request) {
         const userAgent = req.useragent
@@ -58,9 +56,10 @@ export class CloackerUtils {
             return true
         else {
             this.errors.push({
-                errorCode: 4,
+                errorCode: 3,
                 msg: 'Referencia Inválida'
             })
+            return false
         }
     }
 
@@ -69,7 +68,7 @@ export class CloackerUtils {
         const idiomas = body['c']
         if (!idiomas || idiomas.length === 0) {
             this.errors.push({
-                errorCode: 5,
+                errorCode: 4,
                 msg: 'Idioma inválido'
             })
             return false
@@ -77,11 +76,19 @@ export class CloackerUtils {
         const idiomasString = idiomas.join(', ').toLowerCase()
         if (idiomasString.includes('pt')) {
             this.errors.push({
-                errorCode: 5,
+                errorCode: 4,
                 msg: 'Idioma Não Permitido'
             })
             return false
         }
         return true
+    }
+
+    montarResposta(res: Response) {
+        console.log(this.errors)
+        if (this.errors.length === 0)
+            res.json(responseA)
+        else if (this.errors.length > 0)
+            res.json(responseB)
     }
 }

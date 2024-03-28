@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { CloackerController } from './cloackerController';
+import { CloackerController } from './controllers/cloackerController';
 
 const router = Router()
 
