@@ -37,7 +37,7 @@ export class CloackerUtils {
         else {
             this.errors.push({
                 errorCode: 2,
-                msg: `Src inválido | src: ${src}`
+                msg: `Src inválido | ${src}`
             })
             return false
         }
