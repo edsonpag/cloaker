@@ -1,7 +1,9 @@
 import { Request, Response } from "express"
+import { Reader } from "@maxmind/geoip2-node"
 import { CloackerError } from "../interfaces/cloackerError.interface"
 import { responseA } from "../responses/a"
 import { responseB } from "../responses/b"
+import path from "path"
 
 export class CloackerUtils {
 
@@ -78,6 +80,37 @@ export class CloackerUtils {
             this.errors.push({
                 errorCode: 4,
                 msg: 'Idioma Não Permitido'
+            })
+            return false
+        }
+        return true
+    }
+
+    async verificaPais(req: Request) {
+        const body = req.body
+        const ip = body['d']
+        if (!ip) {
+            this.errors.push({
+                errorCode: 5,
+                msg: 'IP Não encontrado'
+            })
+            return false
+        }
+        const paisesBloqueados = ['BR']
+        const reader = await Reader.open(path.join(__dirname, '..', 'databases', 'GeoLite2-Country.mmdb'))
+        const response = reader.country(ip);
+        const countryCode = response.country?.isoCode
+        if (!countryCode) {
+            this.errors.push({
+                errorCode: 5,
+                msg: 'Country Code não encontrado'
+            })
+            return false
+        }
+        if (paisesBloqueados.includes(countryCode)) {
+            this.errors.push({
+                errorCode: 5,
+                msg: 'Country Code bloqueado'
             })
             return false
         }
