@@ -15,7 +15,8 @@ export class CloackerUtils {
         if (!isMobile) {
             this.errors.push({
                 errorCode: 1,
-                msg: `Dispositivo não permitido | Plataforma: ${userAgent?.platform} | OS: ${userAgent?.os}`
+                msg: `Dispositivo não permitido`,
+                info: `Plataforma: ${userAgent?.platform} | OS: ${userAgent?.os}`
             })
             return false
         }
@@ -28,7 +29,8 @@ export class CloackerUtils {
         if (!src) {
             this.errors.push({
                 errorCode: 2,
-                msg: 'Src inexistente'
+                msg: 'Src inexistente',
+                info: ''
             })
             return false
         }
@@ -37,7 +39,8 @@ export class CloackerUtils {
         else {
             this.errors.push({
                 errorCode: 2,
-                msg: `Src inválido | src: ${src}`
+                msg: `Src inválido`,
+                info: `src: ${src}`
             })
             return false
         }
@@ -49,7 +52,8 @@ export class CloackerUtils {
         if (!referencia) {
             this.errors.push({
                 errorCode: 3,
-                msg: 'Sem referencia'
+                msg: 'Sem referencia',
+                info: ''
             })
             return false
         }
@@ -59,7 +63,8 @@ export class CloackerUtils {
         else {
             this.errors.push({
                 errorCode: 3,
-                msg: `Referencia Inválida | Referencia: ${referencia}`
+                msg: `Referencia Inválida`,
+                info: `Referencia: ${referencia}`
             })
             return false
         }
@@ -71,7 +76,8 @@ export class CloackerUtils {
         if (!idiomas || idiomas.length === 0) {
             this.errors.push({
                 errorCode: 4,
-                msg: 'Idioma inválido'
+                msg: 'Idioma inválido',
+                info: ''
             })
             return false
         }
@@ -79,7 +85,8 @@ export class CloackerUtils {
         if (idiomasString.includes('pt')) {
             this.errors.push({
                 errorCode: 4,
-                msg: `Idioma Não Permitido | Idiomas: ${idiomasString}`
+                msg: `Idioma Não Permitido`,
+                info: `Idiomas: ${idiomasString}`
             })
             return false
         }
@@ -92,7 +99,8 @@ export class CloackerUtils {
         if (!ip) {
             this.errors.push({
                 errorCode: 5,
-                msg: 'IP Não encontrado'
+                msg: 'IP Não encontrado',
+                info: ''
             })
             return false
         }
@@ -103,14 +111,16 @@ export class CloackerUtils {
         if (!countryCode) {
             this.errors.push({
                 errorCode: 5,
-                msg: `Country Code não encontrado | IP: ${ip}`
+                msg: `Country Code não encontrado`,
+                info: `IP: ${ip}`
             })
             return false
         }
         if (paisesBloqueados.includes(countryCode)) {
             this.errors.push({
                 errorCode: 5,
-                msg: `Country Code bloqueado | IP: ${ip} | Country Code: ${countryCode}`
+                msg: `Country Code bloqueado`,
+                info: `IP: ${ip} | Country Code: ${countryCode}`
             })
             return false
         }
