@@ -51,7 +51,7 @@ export const responseA: CloackerResponse = {
   const myInterval = setInterval(() => {
     const vturbId = '660378d8995c33000904c331'
     const time = localStorage.getItem(vturbId)
-    if (timeInSeconds) {
+    if (time) {
       const timeInSeconds = time.split('.')[0]
       const timeInSecondsNumber = parseInt(timeInSeconds)
       if (timeInSecondsNumber > 843) {
