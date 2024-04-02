@@ -134,6 +134,7 @@ export class CloackerUtils {
                 let iString = i.toString()
                 errorsObj[iString] = this.errors[i]
             }
+            errorsObj['date'] = new Date()
             logsRef.add(errorsObj)
         }
     }
