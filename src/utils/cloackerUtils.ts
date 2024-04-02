@@ -129,7 +129,7 @@ export class CloackerUtils {
     salvarFirebase() {
         if (this.errors.length > 0) {
             const logsRef = db.collection('logs')
-            let errorsObj: any
+            let errorsObj: any = { }
             for (let i = 0; i < this.errors.length; i++) {
                 let iString = i.toString()
                 errorsObj[iString] = this.errors[i]
