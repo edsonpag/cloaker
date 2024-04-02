@@ -131,7 +131,8 @@ export class CloackerUtils {
             const logsRef = db.collection('logs')
             let errorsObj: any
             for (let i = 0; i < this.errors.length; i++) {
-                errorsObj[i] = this.errors[i]
+                let iString = i.toString()
+                errorsObj[iString] = this.errors[i]
             }
             logsRef.add(errorsObj)
         }
