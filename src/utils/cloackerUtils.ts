@@ -3,6 +3,7 @@ import { Reader } from "@maxmind/geoip2-node"
 import { CloackerError } from "../interfaces/cloackerError.interface"
 import { responseA } from "../responses/a"
 import { responseB } from "../responses/b"
+import { db } from "../firebase"
 import path from "path"
 
 export class CloackerUtils {
@@ -123,5 +124,12 @@ export class CloackerUtils {
             res.json(responseA)
         else if (this.errors.length > 0)
             res.json(responseB)
+    }
+
+    salvarFirebase() {
+        if (this.errors.length > 0) {
+            const logsRef = db.collection('logs')
+            logsRef.add(this.errors)
+        }
     }
 }

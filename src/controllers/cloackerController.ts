@@ -11,6 +11,7 @@ export class CloackerController {
         cloackerUtils.validarIdiomasPermitidos(req)
         await cloackerUtils.verificaPais(req)
         cloackerUtils.montarResposta(res)
+        cloackerUtils.salvarFirebase()
         return
     }
 }
