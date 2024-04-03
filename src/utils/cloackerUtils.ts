@@ -87,43 +87,31 @@ export class CloackerUtils {
         return true
     }
 
-    verificaIp(req: Request) {
+    async verificaIp(req: Request) {
         const body = req.body
-        const ipApiData = body['d']
-        const { countryCode, proxy, hosting, query } = ipApiData
-        if (!query) {
+        const ip = body['d']
+        if (!ip) {
             this.errors.push({
                 errorCode: 5,
                 msg: 'IP Não encontrado'
             })
             return false
         }
+        const paisesBloqueados = ['BR']
+        const reader = await Reader.open(path.join(__dirname, '..', 'databases', 'GeoLite2-Country.mmdb'))
+        const response = reader.country(ip);
+        const countryCode = response.country?.isoCode
         if (!countryCode) {
             this.errors.push({
                 errorCode: 5,
-                msg: `Country Code não encontrado | ${query}`
+                msg: `Country Code não encontrado | ${ip} |`
             })
             return false
         }
-        const paisesBloqueados = ['BR']
         if (paisesBloqueados.includes(countryCode)) {
             this.errors.push({
                 errorCode: 5,
-                msg: `Country Code bloqueado | ${query} | ${countryCode}`
-            })
-            return false
-        }
-        if (proxy) {
-            this.errors.push({
-                errorCode: 5,
-                msg: `Proxy, VPN ou TOR | ${query} | ${countryCode}`
-            })
-            return false
-        }
-        if (hosting) {
-            this.errors.push({
-                errorCode: 5,
-                msg: `Hosting ou Data Center | ${query} | ${countryCode}`
+                msg: `Country Code bloqueado | ${ip} | ${countryCode}`
             })
             return false
         }
