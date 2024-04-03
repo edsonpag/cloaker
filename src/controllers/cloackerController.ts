@@ -5,7 +5,6 @@ export class CloackerController {
 
     async main(req: Request, res: Response) {
         const cloackerUtils = new CloackerUtils()
-        console.log('ref: ' + req.get('Referrer'))
         cloackerUtils.validarDispositivoMobile(req)
         cloackerUtils.validarParametrosDaUrl(req)
         cloackerUtils.validarReferencia(req)
