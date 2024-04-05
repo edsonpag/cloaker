@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { Reader } from "@maxmind/geoip2-node"
+import requestIp from "request-ip"
 import { CloackerError } from "../interfaces/cloackerError.interface"
 import { responseA } from "../responses/a"
 import { responseB } from "../responses/b"
@@ -88,6 +89,7 @@ export class CloackerUtils {
     }
 
     async verificaIp(req: Request) {
+        console.log(requestIp.getClientIp(req))
         const body = req.body
         const ip = body['d']
         if (!ip) {
