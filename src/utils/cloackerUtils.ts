@@ -90,7 +90,6 @@ export class CloackerUtils {
 
     async verificaIp(req: Request) {
         const ip = requestIp.getClientIp(req)
-        console.log(ip)
         if (!ip) {
             this.errors.push({
                 errorCode: 5,
@@ -152,7 +151,6 @@ export class CloackerUtils {
     }
 
     montarResposta(res: Response) {
-        console.log(this.errors)
         if (this.errors.length === 0)
             res.json(responseA)
         else if (this.errors.length > 0)
