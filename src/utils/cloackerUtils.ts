@@ -147,7 +147,7 @@ export class CloackerUtils {
             })
             return false
         }
-        return true 
+        return true
     }
 
     montarResposta(res: Response) {
