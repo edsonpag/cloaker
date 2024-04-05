@@ -90,6 +90,7 @@ export class CloackerUtils {
 
     async verificaIp(req: Request) {
         const ip = requestIp.getClientIp(req)
+        console.log(ip)
         if (!ip) {
             this.errors.push({
                 errorCode: 5,
