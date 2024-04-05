@@ -89,9 +89,7 @@ export class CloackerUtils {
     }
 
     async verificaIp(req: Request) {
-        console.log(requestIp.getClientIp(req))
-        const body = req.body
-        const ip = body['d']
+        const ip = requestIp.getClientIp(req)
         if (!ip) {
             this.errors.push({
                 errorCode: 5,
@@ -100,9 +98,9 @@ export class CloackerUtils {
             return false
         }
         const paisesBloqueados = ['BR']
-        const reader = await Reader.open(path.join(__dirname, '..', 'databases', 'GeoLite2-Country.mmdb'))
-        const response = reader.country(ip);
-        const countryCode = response.country?.isoCode
+        const vpnApiResponse = await fetch(`https://vpnapi.io/api/${ip}?key=10d451ecb0064f1f9bc674f31576c845`)
+        const vpnApiData = await vpnApiResponse.json()
+        const countryCode = vpnApiData.location.country_code
         if (!countryCode) {
             this.errors.push({
                 errorCode: 5,
@@ -114,6 +112,38 @@ export class CloackerUtils {
             this.errors.push({
                 errorCode: 5,
                 msg: `Country Code bloqueado | ${ip} | ${countryCode}`
+            })
+            return false
+        }
+        const vpn = vpnApiData.security.vpn
+        if (vpn) {
+            this.errors.push({
+                errorCode: 5,
+                msg: `VPN DETECTADA | ${ip} | ${countryCode}`
+            })
+            return false
+        }
+        const proxy = vpnApiData.security.proxy
+        if (proxy) {
+            this.errors.push({
+                errorCode: 5,
+                msg: `PROXY DETECTADA | ${ip} | ${countryCode}`
+            })
+            return false
+        }
+        const tor = vpnApiData.security.tor
+        if (tor) {
+            this.errors.push({
+                errorCode: 5,
+                msg: `TOR DETECTADO | ${ip} | ${countryCode}`
+            })
+            return false
+        }
+        const relay = vpnApiData.security.relay
+        if (relay) {
+            this.errors.push({
+                errorCode: 5,
+                msg: `PRIVATE RELAY DETECTADA | ${ip} | ${countryCode}`
             })
             return false
         }
