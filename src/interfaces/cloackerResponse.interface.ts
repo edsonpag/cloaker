@@ -3,5 +3,4 @@ export interface CloackerResponse {
     vturb: string
     vturbScriptId: string
     vturbScriptSrc: string
-    customScript: string
 }
