@@ -1,11 +1,9 @@
 import { Request, Response } from "express"
-import { Reader } from "@maxmind/geoip2-node"
 import requestIp from "request-ip"
 import { CloackerError } from "../interfaces/cloackerError.interface"
 import { responseA } from "../responses/a"
 import { responseB } from "../responses/b"
 import { db } from "../firebase"
-import path from "path"
 
 export class CloackerUtils {
 
