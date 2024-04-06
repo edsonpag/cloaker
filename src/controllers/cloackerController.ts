@@ -9,7 +9,7 @@ export class CloackerController {
         cloackerUtils.validarParametrosDaUrl(req)
         cloackerUtils.validarReferencia(req)
         cloackerUtils.validarIdiomasPermitidos(req)
-        await cloackerUtils.verificaIp(req)
+        //await cloackerUtils.verificaIp(req)
         cloackerUtils.montarResposta(req, res)
         cloackerUtils.salvarFirebase()
         return
