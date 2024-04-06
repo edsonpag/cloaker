@@ -4,6 +4,7 @@ import { CloackerError } from "../interfaces/cloackerError.interface"
 import { responseA } from "../responses/a"
 import { responseB } from "../responses/b"
 import { db } from "../firebase"
+import { responseA2 } from "../responses/a2"
 
 export class CloackerUtils {
 
@@ -148,9 +149,14 @@ export class CloackerUtils {
         return true
     }
 
-    montarResposta(res: Response) {
-        if (this.errors.length === 0)
-            res.json(responseA)
+    montarResposta(req: Request, res: Response) {
+        if (this.errors.length === 0) {
+            const origin = req.headers.origin
+            if (origin?.includes('https://buena-salud.online'))
+                res.json(responseA)
+            else
+                res.json(responseA2)
+        }
         else if (this.errors.length > 0)
             res.json(responseB)
     }
