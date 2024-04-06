@@ -6,13 +6,6 @@ export const responseB: CloackerResponse = {
     vturbScriptId: `scr_6605fd1c3aea810007af09ff`,
     vturbScriptSrc: 'var s = document.createElement("script"); s.src = "https://scripts.converteai.net/85ae2223-1273-4cb2-9ea3-6d8b322fbfe8/players/6605fd1c3aea810007af09ff/player.js", s.async = !0, document.head.appendChild(s);',
     customScript: `(function () {
-        var xhr = new XMLHttpRequest()
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById("comentarios-facebook").innerHTML = xhr.responseText
-            }
-        };
-        xhr.open("GET", "facebook-comentarios.html", true)
-        xhr.send()
+        let customScript = true
     })()`
 }
