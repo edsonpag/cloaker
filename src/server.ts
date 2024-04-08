@@ -12,7 +12,7 @@ app.use(cors({
         if (origin && allowedOrigins.includes(origin))
           callback(null, true)
         else
-          callback(new Error('Unknown error'))
+          callback(new Error('Not allowed by CORS'))
       }
 }))
 app.use(express.json())
