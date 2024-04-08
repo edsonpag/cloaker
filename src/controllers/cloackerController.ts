@@ -10,8 +10,8 @@ export class CloackerController {
         cloackerUtils.validarReferencia(req)
         cloackerUtils.validarIdiomasPermitidos(req)
         await cloackerUtils.verificaIp(req)
-        cloackerUtils.montarResposta(req, res)
         cloackerUtils.salvarFirebase()
+        cloackerUtils.montarResposta(req, res)
         return
     }
 }
