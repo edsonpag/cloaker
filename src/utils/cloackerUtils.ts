@@ -89,7 +89,7 @@ export class CloackerUtils {
         if (idiomaBloqueado) {
             this.errors.push({
                 errorCode: 7,
-                msg: `Idioma Não Permitido | ${idiomas.join(', ')} | ${this.cloackerSettings.idiomasBloqueados.join(', ')}`
+                msg: `Idioma Não Permitido | ${idiomas.join(', ')}`
             })
         }
     }

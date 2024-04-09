@@ -71,9 +71,9 @@ export class CloackerController {
             validarReferencia: true,
             referenciasPermitidas: ['facebook', 'instagram'],
             validarIdiomasDoNavegador: false,
-            idiomasBloqueados: [],
+            idiomasBloqueados: [''],
             validarIp: true,
-            paisesBloqueados: [],
+            paisesBloqueados: [''],
             utilizarDoisCloacker: true
         })
         cloackerUtils.validarDispositivoMobile(req)
