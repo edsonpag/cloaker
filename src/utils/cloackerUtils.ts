@@ -156,19 +156,6 @@ export class CloackerUtils {
         }
     }
 
-    async montarResposta(res: Response, origin: string) {
-        if (!this.cloackerSettings.utilizarDoisCloacker) {
-            if (this.errors.length === 0) {
-                const response = await import(`../responses/${origin}/a.js`)
-                res.json(response)
-            }
-            else if (this.errors.length > 0) {
-                const response = await import(`../responses/${origin}/b.js`)
-                res.json(response)
-            }
-        }
-    }
-
     salvarFirebase() {
         if (this.errors.length > 0) {
             const logsRef = db.collection('logs')
