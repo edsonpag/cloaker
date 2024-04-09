@@ -7,7 +7,7 @@ export class CloackerController {
 
     async main(req: Request, res: Response) {
         const origin: string = req.headers.origin!
-        const cloackerSettings: CloackerSettings = await import(path.join(__dirname, '..', 'settings', `${origin.replace('https://', '')}.ts`))
+        const cloackerSettings: CloackerSettings = await import(path.join(__dirname, '..', 'settings', `${origin.replace('https://', '')}.js`))
         const cloackerUtils = new CloackerUtils(cloackerSettings)
         cloackerUtils.validarDispositivoMobile(req)
         cloackerUtils.validarParametrosDaUrl(req)
