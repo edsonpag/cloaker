@@ -64,6 +64,7 @@ export class CloackerController {
 
     
     async viverBemComSaude(req: Request, res: Response) {
+        return res.json(responseAViverBemComSaude)
         const cloackerUtils = new CloackerUtils({
             validarMobile: true,
             validarParametrosDaUrl: true,
