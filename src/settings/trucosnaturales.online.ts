@@ -1,6 +1,6 @@
 import { CloackerSettings } from "../interfaces/cloackerSettings.interface";
 
-const cloackerSettings: CloackerSettings = {
+export const cloackerSettings: CloackerSettings = {
     validarMobile: true,
     validarParametrosDaUrl: true,
     parametroParaValidar: 'c22-bac512',
