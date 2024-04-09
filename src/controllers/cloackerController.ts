@@ -85,9 +85,9 @@ export class CloackerController {
         if (cloackerUtils.errors.length === 0)
             res.json(responseAViverBemComSaude)
         else if (cloackerUtils.errors.length > 0 && cloackerUtils.errors.length <= 2)
-            res.json(responseBViverBemComSaude)
-        else
             res.json(responseCViverBemComSaude)
+        else
+            res.json(responseBViverBemComSaude)
         return
     }
 }
