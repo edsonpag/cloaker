@@ -67,7 +67,7 @@ export class CloackerController {
         const cloackerUtils = new CloackerUtils({
             validarMobile: true,
             validarParametrosDaUrl: true,
-            parametroParaValidar: 'c22-bac512',
+            parametroParaValidar: 'CT8 [1--4-1]',
             validarReferencia: true,
             referenciasPermitidas: ['facebook', 'instagram'],
             validarIdiomasDoNavegador: false,
