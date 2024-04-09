@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
+import path from "path";
 import { CloackerUtils } from "../utils/cloackerUtils";
 import { CloackerSettings } from "../interfaces/cloackerSettings.interface";
-import path from "path";
 
 export class CloackerController {
 
