@@ -1,16 +1,22 @@
 import { Request, Response } from "express"
 import requestIp from "request-ip"
 import { CloackerError } from "../interfaces/cloackerError.interface"
-import { responseA } from "../responses/a"
-import { responseB } from "../responses/b"
 import { db } from "../firebase"
-import { responseA2 } from "../responses/a2"
+import { CloackerSettings } from "../interfaces/cloackerSettings.interface"
 
 export class CloackerUtils {
 
+    cloackerSettings: CloackerSettings
+
     errors: CloackerError[] = []
 
+    constructor(cloackerSettings: CloackerSettings) {
+        this.cloackerSettings = cloackerSettings
+    }
+
     validarDispositivoMobile(req: Request) {
+        if (!this.cloackerSettings.validarMobile)
+            return
         const userAgent = req.useragent
         const isMobile = userAgent?.isMobile
         if (!isMobile) {
@@ -18,29 +24,26 @@ export class CloackerUtils {
                 errorCode: 1,
                 msg: `Dispositivo não permitido | ${userAgent?.platform} | ${userAgent?.os}`
             })
-            return false
         }
-        return true
     }
 
     validarParametrosDaUrl(req: Request) {
+        if (!this.cloackerSettings.validarParametrosDaUrl)
+            return
         const body = req.body
-        const src = body['a']
-        if (!src) {
+        const url = body['a']
+        if (!url) {
             this.errors.push({
                 errorCode: 2,
                 msg: 'Src inexistente'
             })
-            return false
+            return
         }
-        if (src.includes('c22-bac512'))
-            return true
-        else {
+        if (!url.includes(this.cloackerSettings.parametroParaValidar)) {
             this.errors.push({
-                errorCode: 2,
-                msg: `Src inválido | ${src}`
+                errorCode: 3,
+                msg: `Src inválido | ${url}`
             })
-            return false
         }
     }
 
@@ -49,122 +52,127 @@ export class CloackerUtils {
         let referencia: string = body['b']
         if (!referencia) {
             this.errors.push({
-                errorCode: 3,
+                errorCode: 4,
                 msg: 'Sem referencia'
             })
-            return false
+            return
         }
+        let referenciaValida = false
         referencia = referencia.toLowerCase()
-        if (referencia.includes('facebook') || referencia.includes('instagram'))
-            return true
-        else {
+        for (let referenciaPermitida of this.cloackerSettings.referenciasPermitidas) {
+            if (referenciaPermitida.includes(referencia)) {
+                referenciaValida = true
+                break
+            }
+        }
+        if (!referenciaValida) {
             this.errors.push({
-                errorCode: 3,
+                errorCode: 5,
                 msg: `Referencia Inválida | ${referencia}`
             })
-            return false
         }
     }
 
     validarIdiomasPermitidos(req: Request) {
+        if (!this.cloackerSettings.validarIdiomasDoNavegador)
+            return
         const body = req.body
         const idiomas = body['c']
         if (!idiomas || idiomas.length === 0) {
             this.errors.push({
-                errorCode: 4,
-                msg: 'Idioma inválido'
+                errorCode: 6,
+                msg: 'Idioma não encontrado'
             })
-            return false
+            return
         }
-        const idiomasString = idiomas.join(', ').toLowerCase()
-        if (idiomasString.includes('pt')) {
+        let idiomaBloqueado = idiomas.some((idioma: string) => this.cloackerSettings.idiomasBloqueados.indexOf(idioma) !== -1)
+        if (idiomaBloqueado) {
             this.errors.push({
-                errorCode: 4,
-                msg: `Idioma Não Permitido | ${idiomasString}`
+                errorCode: 7,
+                msg: `Idioma Não Permitido | ${idiomas.join(', ')}`
             })
-            return false
         }
-        return true
     }
 
     async verificaIp(req: Request) {
+        if (!this.cloackerSettings.validarIp)
+            return
         const ip = requestIp.getClientIp(req)
         if (!ip) {
             this.errors.push({
-                errorCode: 5,
+                errorCode: 8,
                 msg: 'IP Não encontrado'
             })
-            return false
+            return
         }
-        const paisesBloqueados = ['BR']
         const vpnApiResponse = await fetch(`https://vpnapi.io/api/${ip}?key=10d451ecb0064f1f9bc674f31576c845`)
         const vpnApiData = await vpnApiResponse.json()
         const countryCode = vpnApiData.location.country_code
         if (!countryCode) {
             this.errors.push({
-                errorCode: 5,
+                errorCode: 9,
                 msg: `Country Code não encontrado | ${ip} |`
             })
-            return false
+            return
         }
-        if (paisesBloqueados.includes(countryCode)) {
+        if (this.cloackerSettings.paisesBloqueados.includes(countryCode)) {
             this.errors.push({
-                errorCode: 5,
+                errorCode: 10,
                 msg: `Country Code bloqueado | ${ip} | ${countryCode}`
             })
-            return false
+            return
         }
         const vpn = vpnApiData.security.vpn
         if (vpn) {
             this.errors.push({
-                errorCode: 5,
+                errorCode: 11,
                 msg: `VPN DETECTADA | ${ip} | ${countryCode}`
             })
-            return false
+            return
         }
         const proxy = vpnApiData.security.proxy
         if (proxy) {
             this.errors.push({
-                errorCode: 5,
+                errorCode: 12,
                 msg: `PROXY DETECTADA | ${ip} | ${countryCode}`
             })
-            return false
+            return
         }
         const tor = vpnApiData.security.tor
         if (tor) {
             this.errors.push({
-                errorCode: 5,
+                errorCode: 13,
                 msg: `TOR DETECTADO | ${ip} | ${countryCode}`
             })
-            return false
+            return
         }
         const relay = vpnApiData.security.relay
         if (relay) {
             this.errors.push({
-                errorCode: 5,
+                errorCode: 14,
                 msg: `PRIVATE RELAY DETECTADA | ${ip} | ${countryCode}`
             })
-            return false
+            return
         }
-        return true
     }
 
-    montarResposta(req: Request, res: Response) {
-        if (this.errors.length === 0) {
-            const origin = req.headers.origin
-            if (origin?.includes('https://buena-salud.online'))
-                res.json(responseA)
-            else
-                res.json(responseA2)
+    async montarResposta(res: Response, origin: string) {
+        if (!this.cloackerSettings.utilizarDoisCloacker) {
+            if (this.errors.length === 0) {
+                const response = await import(`../responses/${origin}/a.ts`)
+                res.json(response)
+            }
+            else if (this.errors.length > 0) {
+                const response = await import(`../responses/${origin}/b.ts`)
+                res.json(response)
+            }
         }
-        else if (this.errors.length > 0)
-            res.json(responseB)
     }
 
     salvarFirebase() {
         if (this.errors.length > 0) {
             const logsRef = db.collection('logs')
-            let errorsObj: any = { }
+            let errorsObj: any = {}
             for (let i = 0; i < this.errors.length; i++) {
                 let iString = i.toString()
                 errorsObj[iString] = this.errors[i]
