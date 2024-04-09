@@ -58,4 +58,31 @@ export class CloackerController {
             res.json(responseBTrucosNaturales)
         return
     }
+
+    
+    async viverBemComSaude(req: Request, res: Response) {
+        const cloackerUtils = new CloackerUtils({
+            validarMobile: true,
+            validarParametrosDaUrl: true,
+            parametroParaValidar: 'c22-bac512',
+            validarReferencia: true,
+            referenciasPermitidas: ['facebook', 'instagram'],
+            validarIdiomasDoNavegador: false,
+            idiomasBloqueados: [],
+            validarIp: true,
+            paisesBloqueados: [],
+            utilizarDoisCloacker: true
+        })
+        cloackerUtils.validarDispositivoMobile(req)
+        cloackerUtils.validarParametrosDaUrl(req)
+        cloackerUtils.validarReferencia(req)
+        cloackerUtils.validarIdiomasPermitidos(req)
+        await cloackerUtils.verificaIp(req)
+        cloackerUtils.salvarFirebase()
+        if (cloackerUtils.errors.length === 0)
+            res.json(responseATrucosNaturales)
+        else if (cloackerUtils.errors.length > 0)
+            res.json(responseBTrucosNaturales)
+        return
+    }
 }
