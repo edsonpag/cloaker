@@ -60,7 +60,7 @@ export class CloackerUtils {
         let referenciaValida = false
         referencia = referencia.toLowerCase()
         this.cloackerSettings.referenciasPermitidas.forEach(referenciaPermitida => {
-            if (referenciaPermitida.includes(referencia)) {
+            if (referencia.includes(referenciaPermitida)) {
                 referenciaValida = true
                 return
             }
