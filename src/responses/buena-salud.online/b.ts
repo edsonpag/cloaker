@@ -1,4 +1,4 @@
-import { CloackerResponse } from "../interfaces/cloackerResponse.interface";
+import { CloackerResponse } from "../../interfaces/cloackerResponse.interface";
 
 export const responseB: CloackerResponse = {
     headline: `<h2>Descubra cómo un simple truco con la piña hizo que mi marido recuperara la visión</h2>`,
