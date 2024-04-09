@@ -5,9 +5,8 @@
   "main": "dist/server.js",
   "scripts": {
     "build": "npm run copyfiles && npx tsc",
-    "copyfiles": "copyfiles -u 1 src/databases/**/* dist",
     "start": "node dist/server.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\" \"npm run copyfiles\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
   },
   "keywords": [],
   "author": "",
@@ -27,7 +26,6 @@
     "@types/node": "^20.11.30",
     "@types/request-ip": "^0.0.41",
     "concurrently": "^8.2.2",
-    "copyfiles": "^2.4.1",
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
