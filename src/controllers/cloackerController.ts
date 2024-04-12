@@ -68,11 +68,11 @@ export class CloackerController {
             validarMobile: true,
             validarParametrosDaUrl: true,
             parametroParaValidar: 'CT8',
-            validarReferencia: true,
+            validarReferencia: false,
             referenciasPermitidas: ['facebook', 'instagram', 'tiktok'],
             validarIdiomasDoNavegador: false,
             idiomasBloqueados: [],
-            validarIp: true,
+            validarIp: false,
             paisesBloqueados: ['BR'],
             utilizarDoisCloacker: true
         })

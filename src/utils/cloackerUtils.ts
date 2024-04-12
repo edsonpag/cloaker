@@ -48,6 +48,8 @@ export class CloackerUtils {
     }
 
     validarReferencia(req: Request) {
+        if (!this.cloackerSettings.validarReferencia)
+            return
         const body = req.body
         let referencia: string = body['b']
         if (!referencia) {
