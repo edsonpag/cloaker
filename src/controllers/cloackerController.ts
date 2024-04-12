@@ -69,7 +69,7 @@ export class CloackerController {
             validarParametrosDaUrl: true,
             parametroParaValidar: 'CT8',
             validarReferencia: true,
-            referenciasPermitidas: ['facebook', 'instagram'],
+            referenciasPermitidas: ['facebook', 'instagram', 'tiktok'],
             validarIdiomasDoNavegador: false,
             idiomasBloqueados: [],
             validarIp: true,
