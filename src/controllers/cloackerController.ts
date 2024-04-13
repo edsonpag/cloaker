@@ -90,4 +90,30 @@ export class CloackerController {
             res.json(responseBViverBemComSaude)
         return
     }
+
+    async ondaCerebral(req: Request, res: Response) {
+        const cloackerUtils = new CloackerUtils({
+            validarMobile: true,
+            validarParametrosDaUrl: true,
+            parametroParaValidar: 'c22-bac512',
+            validarReferencia: false,
+            referenciasPermitidas: [],
+            validarIdiomasDoNavegador: false,
+            idiomasBloqueados: [],
+            validarIp: false,
+            paisesBloqueados: [],
+            utilizarDoisCloacker: false
+        })
+        cloackerUtils.validarDispositivoMobile(req)
+        cloackerUtils.validarParametrosDaUrl(req)
+        cloackerUtils.validarReferencia(req)
+        cloackerUtils.validarIdiomasPermitidos(req)
+        await cloackerUtils.verificaIp(req)
+        cloackerUtils.salvarFirebase()
+        if (cloackerUtils.errors.length === 0)
+            res.json(responseABuenaSalud)
+        else if (cloackerUtils.errors.length > 0)
+            res.json(responseBBuenaSalud)
+        return
+    }
 }
