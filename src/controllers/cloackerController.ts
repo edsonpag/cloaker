@@ -7,6 +7,8 @@ import { responseBTrucosNaturales } from "../responses/trucosnaturales.online/b"
 import { responseAViverBemComSaude } from "../responses/viverbemcomsaude.online/a";
 import { responseBViverBemComSaude } from "../responses/viverbemcomsaude.online/b";
 import { responseCViverBemComSaude } from "../responses/viverbemcomsaude.online/c";
+import { responseARitualSecretoRevelado } from "../responses/ritualsecretorevelado.online/a";
+import { responseBRitualSecretoRevelado } from "../responses/ritualsecretorevelado.online/b";
 
 export class CloackerController {
 
@@ -111,9 +113,9 @@ export class CloackerController {
         await cloackerUtils.verificaIp(req)
         cloackerUtils.salvarFirebase()
         if (cloackerUtils.errors.length === 0)
-            res.json(responseABuenaSalud)
+            res.json(responseARitualSecretoRevelado)
         else if (cloackerUtils.errors.length > 0)
-            res.json(responseBBuenaSalud)
+            res.json(responseBRitualSecretoRevelado)
         return
     }
 }
