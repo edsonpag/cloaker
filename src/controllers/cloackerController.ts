@@ -9,6 +9,9 @@ import { responseBViverBemComSaude } from "../responses/viverbemcomsaude.online/
 import { responseCViverBemComSaude } from "../responses/viverbemcomsaude.online/c";
 import { responseARitualSecretoRevelado } from "../responses/ritualsecretorevelado.online/a";
 import { responseBRitualSecretoRevelado } from "../responses/ritualsecretorevelado.online/b";
+import { responseATruqueSaudavel } from "../responses/truquesaudavel.online/a";
+import { responseCTruqueSaudavel } from "../responses/truquesaudavel.online/c";
+import { responseBTruqueSaudavel } from "../responses/truquesaudavel.online/b";
 
 export class CloackerController {
 
@@ -116,6 +119,34 @@ export class CloackerController {
             res.json(responseARitualSecretoRevelado)
         else if (cloackerUtils.errors.length > 0)
             res.json(responseBRitualSecretoRevelado)
+        return
+    }
+
+    async truqueSaudavel(req: Request, res: Response) {
+        const cloackerUtils = new CloackerUtils({
+            validarMobile: true,
+            validarParametrosDaUrl: true,
+            parametroParaValidar: 'c22-bac512',
+            validarReferencia: false,
+            referenciasPermitidas: [],
+            validarIdiomasDoNavegador: false,
+            idiomasBloqueados: [],
+            validarIp: false,
+            paisesBloqueados: [],
+            utilizarDoisCloacker: true
+        })
+        cloackerUtils.validarDispositivoMobile(req)
+        cloackerUtils.validarParametrosDaUrl(req)
+        cloackerUtils.validarReferencia(req)
+        cloackerUtils.validarIdiomasPermitidos(req)
+        await cloackerUtils.verificaIp(req)
+        cloackerUtils.salvarFirebase()
+        if (cloackerUtils.errors.length === 0)
+            res.json(responseATruqueSaudavel)
+        else if (cloackerUtils.errors.length > 0 && cloackerUtils.errors.length <= 2)
+            res.json(responseCTruqueSaudavel)
+        else
+            res.json(responseBTruqueSaudavel)
         return
     }
 }
