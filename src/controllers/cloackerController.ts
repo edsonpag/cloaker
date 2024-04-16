@@ -12,6 +12,9 @@ import { responseBRitualSecretoRevelado } from "../responses/ritualsecretorevela
 import { responseATruqueSaudavel } from "../responses/truquesaudavel.online/a";
 import { responseCTruqueSaudavel } from "../responses/truquesaudavel.online/c";
 import { responseBTruqueSaudavel } from "../responses/truquesaudavel.online/b";
+import { responseATruqueNaturalSaudavel } from "../responses/truquenaturalsaudavel.online/a";
+import { responseBTruqueNaturalSaudavel } from "../responses/truquenaturalsaudavel.online/b";
+import { responseCTruqueNaturalSaudavel } from "../responses/truquenaturalsaudavel.online/c";
 
 export class CloackerController {
 
@@ -147,6 +150,34 @@ export class CloackerController {
             res.json(responseCTruqueSaudavel)
         else
             res.json(responseBTruqueSaudavel)
+        return
+    }
+
+    async truqueNaturalSaudavel(req: Request, res: Response) {
+        const cloackerUtils = new CloackerUtils({
+            validarMobile: true,
+            validarParametrosDaUrl: true,
+            parametroParaValidar: 'CT8',
+            validarReferencia: true,
+            referenciasPermitidas: ['facebook', 'instagram'],
+            validarIdiomasDoNavegador: false,
+            idiomasBloqueados: [],
+            validarIp: true,
+            paisesBloqueados: ['BR'],
+            utilizarDoisCloacker: true
+        })
+        cloackerUtils.validarDispositivoMobile(req)
+        cloackerUtils.validarParametrosDaUrl(req)
+        cloackerUtils.validarReferencia(req)
+        cloackerUtils.validarIdiomasPermitidos(req)
+        await cloackerUtils.verificaIp(req)
+        cloackerUtils.salvarFirebase()
+        if (cloackerUtils.errors.length === 0)
+            res.json(responseATruqueNaturalSaudavel)
+        else if (cloackerUtils.errors.length > 0 && cloackerUtils.errors.length <= 2)
+            res.json(responseBTruqueNaturalSaudavel)
+        else
+            res.json(responseCTruqueNaturalSaudavel)
         return
     }
 }
