@@ -24,7 +24,7 @@ export const responseATruqueNaturalSaudavel: CloackerResponse = {
             if (currentVslTimeInSeconds) {
                 const currentVslTimeInSecondsParsed = parseInt(currentVslTimeInSeconds)
                 if (currentVslTimeInSecondsParsed >= timeToReleaseTheDownsellInSeconds) {
-                    history.pushState({ page: 'downsell' }, '', '/downsell/index.html')
+                    history.pushState({ page: 'downsell' }, '', '/downsell/d.html')
                     history.pushState({ page: 'front' }, '', '/index.html')
                     clearInterval(myInterval)
                 }
