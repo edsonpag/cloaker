@@ -163,7 +163,7 @@ export class CloackerController {
             validarIdiomasDoNavegador: false,
             idiomasBloqueados: [],
             validarIp: true,
-            paisesBloqueados: ['BR'],
+            paisesBloqueados: [],
             utilizarDoisCloacker: true
         })
         cloackerUtils.validarDispositivoMobile(req)

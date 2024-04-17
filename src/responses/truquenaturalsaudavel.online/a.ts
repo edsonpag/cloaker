@@ -14,5 +14,22 @@ export const responseATruqueNaturalSaudavel: CloackerResponse = {
         };
         xhr.open("GET", "facebook-comentarios.html", true)
         xhr.send()
-    })()`
+    })()
+    
+    (function () {
+        const vturbId = '65d3d5aa73a79a0007c15c45'
+        const timeToReleaseTheDownsellInSeconds = 912
+        const myInterval = setInterval(() => {
+            const currentVslTimeInSeconds = localStorage.getItem(vturbId)
+            if (currentVslTimeInSeconds) {
+                const currentVslTimeInSecondsParsed = parseInt(currentVslTimeInSeconds)
+                if (currentVslTimeInSecondsParsed >= timeToReleaseTheDownsellInSeconds) {
+                    history.pushState({ page: 'downsell' }, '', '/downsell/index.html')
+                    history.pushState({ page: 'front' }, '', '/index.html')
+                    clearInterval(myInterval)
+                }
+            }
+        }, 1000)
+    })()
+    `
 }
