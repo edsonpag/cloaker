@@ -22,7 +22,7 @@ export const responseATruqueNaturalSaudavel: CloackerResponse = {
             if (state && state.page === 'downsell')
                 location.href = '/downsell/d.html'
             else if (state && state.page === 'front')
-                location.href = '/'
+                location.href = '/index.html'
         })
 
         const vturbId = '65d3d5aa73a79a0007c15c45'
