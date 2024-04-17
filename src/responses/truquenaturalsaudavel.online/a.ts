@@ -22,8 +22,6 @@ export const responseATruqueNaturalSaudavel: CloackerResponse = {
             console.log('fire')
             if (state && state.page === 'downsell')
                 location.href = '/downsell/d.html'
-            else
-                localStorage.href = '/'
         })
 
         const vturbId = '65d3d5aa73a79a0007c15c45'
