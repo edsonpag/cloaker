@@ -17,6 +17,15 @@ export const responseATruqueNaturalSaudavel: CloackerResponse = {
         xhr.send()
 
         //downsell
+        addEventListener('popstate', (event) => {
+            const state = event.state
+            console.log('fire')
+            if (state && state.page === 'downsell')
+                location.href = '/downsell/d.html'
+            else
+                localStorage.href = '/'
+        })
+
         const vturbId = '65d3d5aa73a79a0007c15c45'
         const timeToReleaseTheDownsellInSeconds = 912
         const myInterval = setInterval(() => {
