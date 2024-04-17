@@ -17,15 +17,18 @@ export const responseATruqueNaturalSaudavel: CloackerResponse = {
     })()
     
     (function () {
+        console.log('rodei')
         const vturbId = '65d3d5aa73a79a0007c15c45'
         const timeToReleaseTheDownsellInSeconds = 912
         const myInterval = setInterval(() => {
+            console.log('interval')
             const currentVslTimeInSeconds = localStorage.getItem(vturbId)
             if (currentVslTimeInSeconds) {
                 const currentVslTimeInSecondsParsed = parseInt(currentVslTimeInSeconds)
                 if (currentVslTimeInSecondsParsed >= timeToReleaseTheDownsellInSeconds) {
                     history.pushState({ page: 'downsell' }, '', '/downsell/index.html')
                     history.pushState({ page: 'front' }, '', '/index.html')
+                    console.log('downsell')
                     clearInterval(myInterval)
                 }
             }
