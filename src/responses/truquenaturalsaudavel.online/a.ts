@@ -19,9 +19,10 @@ export const responseATruqueNaturalSaudavel: CloackerResponse = {
         //downsell
         addEventListener('popstate', (event) => {
             const state = event.state
-            console.log('fire')
             if (state && state.page === 'downsell')
                 location.href = '/downsell/d.html'
+            else if (state && state.page === 'front')
+                location.href = '/'
         })
 
         const vturbId = '65d3d5aa73a79a0007c15c45'
