@@ -51,9 +51,9 @@ export class CloackerController {
             parametroParaValidar: 'c22-bac512',
             validarReferencia: true,
             referenciasPermitidas: ['facebook', 'instagram'],
-            validarIdiomasDoNavegador: false,
+            validarIdiomasDoNavegador: true,
             idiomasBloqueados: ['pt-BR'],
-            validarIp: false,
+            validarIp: true,
             paisesBloqueados: ['BR'],
             utilizarDoisCloacker: false
         })
