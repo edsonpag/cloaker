@@ -7,6 +7,7 @@ export const responseATrucosNaturales: CloackerResponse = {
     vturbScriptId: 'scr_6611a20f2aa8f900081262d6',
     vturbScriptSrc: 'var s=document.createElement("script"); s.src="https://scripts.converteai.net/85ae2223-1273-4cb2-9ea3-6d8b322fbfe8/players/6611a20f2aa8f900081262d6/player.js", s.async=!0,document.head.appendChild(s);',
     customScript: `(function () {
+        // comentarios
         var xhr = new XMLHttpRequest()
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -15,5 +16,26 @@ export const responseATrucosNaturales: CloackerResponse = {
         };
         xhr.open("GET", "facebook-comentarios.html", true)
         xhr.send()
+
+        //downsell
+        addEventListener('popstate', (event) => {
+            const state = event.state
+            if (state && state.page === 'downsell')
+                location.href = '/downsell/d.html'
+        })
+
+        const vturbId = '6611a20f2aa8f900081262d6'
+        const timeToReleaseTheDownsellInSeconds = 843
+        const myInterval = setInterval(() => {
+            const currentVslTimeInSeconds = localStorage.getItem(vturbId)
+            if (currentVslTimeInSeconds) {
+                const currentVslTimeInSecondsParsed = parseInt(currentVslTimeInSeconds)
+                if (currentVslTimeInSecondsParsed >= timeToReleaseTheDownsellInSeconds) {
+                    history.replaceState({ page: 'downsell' }, '', '/downsell/d.html')
+                    history.pushState({ page: 'front' }, '', '/')
+                    clearInterval(myInterval)
+                }
+            }
+        }, 1000)
     })()`
 }
