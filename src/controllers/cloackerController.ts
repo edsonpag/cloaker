@@ -49,11 +49,11 @@ export class CloackerController {
             validarMobile: true,
             validarParametrosDaUrl: true,
             parametroParaValidar: 'c22-bac512',
-            validarReferencia: true,
+            validarReferencia: false,
             referenciasPermitidas: ['facebook', 'instagram'],
             validarIdiomasDoNavegador: false,
             idiomasBloqueados: [],
-            validarIp: true,
+            validarIp: false,
             paisesBloqueados: ['BR'],
             utilizarDoisCloacker: true
         })
