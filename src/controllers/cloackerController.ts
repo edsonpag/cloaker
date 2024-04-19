@@ -51,11 +51,11 @@ export class CloackerController {
             parametroParaValidar: 'c22-bac512',
             validarReferencia: true,
             referenciasPermitidas: ['facebook', 'instagram'],
-            validarIdiomasDoNavegador: true,
-            idiomasBloqueados: ['pt-BR'],
+            validarIdiomasDoNavegador: false,
+            idiomasBloqueados: [],
             validarIp: true,
             paisesBloqueados: ['BR'],
-            utilizarDoisCloacker: false
+            utilizarDoisCloacker: true
         })
         cloackerUtils.validarDispositivoMobile(req)
         cloackerUtils.validarParametrosDaUrl(req)
@@ -64,9 +64,11 @@ export class CloackerController {
         await cloackerUtils.verificaIp(req)
         cloackerUtils.salvarFirebase()
         if (cloackerUtils.errors.length === 0)
-            res.json(responseATrucosNaturales)
-        else if (cloackerUtils.errors.length > 0)
-            res.json(responseBTrucosNaturales)
+            res.json(responseATruqueNaturalSaudavel)
+        else if (cloackerUtils.errors.length > 0 && cloackerUtils.errors.length <= 2)
+            res.json(responseCTruqueNaturalSaudavel)
+        else
+            res.json(responseBTruqueNaturalSaudavel)
         return
     }
 
