@@ -26,8 +26,8 @@ export class CloackerController {
             validarReferencia: false,
             referenciasPermitidas: [],
             validarIdiomasDoNavegador: true,
-            idiomasBloqueados: ['pt-BR'],
-            validarIp: true,
+            idiomasBloqueados: [],
+            validarIp: false,
             paisesBloqueados: [],
             utilizarDoisCloacker: false
         })
