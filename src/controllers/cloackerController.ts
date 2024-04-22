@@ -23,12 +23,12 @@ export class CloackerController {
             validarMobile: true,
             validarParametrosDaUrl: true,
             parametroParaValidar: 'c22-bac512',
-            validarReferencia: true,
-            referenciasPermitidas: ['facebook', 'instagram'],
+            validarReferencia: false,
+            referenciasPermitidas: [],
             validarIdiomasDoNavegador: true,
             idiomasBloqueados: ['pt-BR'],
             validarIp: true,
-            paisesBloqueados: ['BR'],
+            paisesBloqueados: [],
             utilizarDoisCloacker: false
         })
         cloackerUtils.validarDispositivoMobile(req)
