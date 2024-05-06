@@ -31,18 +31,28 @@ export class CloackerUtils {
         if (!this.cloackerSettings.validarParametrosDaUrl)
             return
         const body = req.body
-        const url = body['a']
-        if (!url) {
+        const src = body['a']
+        if (!src) {
             this.errors.push({
                 errorCode: 2,
                 msg: 'Src inexistente'
             })
             return
         }
-        if (!url.includes(this.cloackerSettings.parametroParaValidar)) {
+        const parameters = src.split('|')
+        const campaignName = parameters[0]
+        if (!campaignName.includes(this.cloackerSettings.parametroParaValidar)) {
             this.errors.push({
                 errorCode: 3,
-                msg: `Src inválido | ${url}`
+                msg: `Campaign Name inválido | ${src}`
+            })
+        }
+        const siteSourceName = parameters[4]
+        // && siteSourceName !== 'an' && siteSourceName !== 'msg' (caso comece a rodar no messanger ou no audience network)
+        if (siteSourceName !== 'fb' && siteSourceName !== 'ig') {
+            this.errors.push({
+                errorCode: 4,
+                msg: `Site Source Name inválido | ${src}`
             })
         }
     }
