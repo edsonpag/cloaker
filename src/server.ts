@@ -6,9 +6,7 @@ import routes from './routes'
 const app: Express = express()
 const port = 8080
 
-app.use(cors({
-    origin: 'https://truquesaudavel.online'
-}))
+app.use(cors())
 app.use(express.json())
 app.use(useragent.express())
 app.use('/', routes)
