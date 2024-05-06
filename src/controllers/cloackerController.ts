@@ -15,7 +15,7 @@ export class CloackerController {
         res.setHeader('content-type', 'text/plain');
         if (cloackerUtils.errors.length === 0)
             return res.send('truque-natural-visao.html')
-        else if (cloackerUtils.errors.length > 0 && cloackerUtils.errors.length <= 2)
+        else if (cloackerUtils.errors.length === 1)
             return res.send('cha-anti-oculos.html')
         return res.send('default.html')
     }

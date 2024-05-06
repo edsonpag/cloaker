@@ -1,5 +1,4 @@
-import { Request, Response } from "express"
-import requestIp from "request-ip"
+import { Request } from "express"
 import { CloackerError } from "../interfaces/cloackerError.interface"
 import { db } from "../firebase"
 import { CloackerSettings } from "../interfaces/cloackerSettings.interface"
@@ -46,6 +45,7 @@ export class CloackerUtils {
                 errorCode: 3,
                 msg: `Campaign Name inválido | ${src}`
             })
+            return
         }
         const siteSourceName = parameters[4]
         // && siteSourceName !== 'an' && siteSourceName !== 'msg' (caso comece a rodar no messanger ou no audience network)
