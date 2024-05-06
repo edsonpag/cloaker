@@ -12,12 +12,11 @@ export class CloackerController {
         cloackerUtils.validarDispositivoMobile(req)
         cloackerUtils.validarParametrosDaUrl(req)
         cloackerUtils.salvarFirebase()
+        res.setHeader('content-type', 'text/plain');
         if (cloackerUtils.errors.length === 0)
-            res.json({ page: 'truque-natural-visao.html' })
+            return res.send('truque-natural-visao.html')
         else if (cloackerUtils.errors.length > 0 && cloackerUtils.errors.length <= 2)
-            res.json({ page: 'cha-anti-oculos.html' })
-        else
-            res.json({ page: 'default.html' })
-        return
+            return res.send('cha-anti-oculos.html')
+        return res.send('default.html')
     }
 }
