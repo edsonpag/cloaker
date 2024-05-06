@@ -1,8 +1,5 @@
 import { Request, Response } from "express";
 import { CloackerUtils } from "../utils/cloackerUtils";
-import { responseATruqueSaudavel } from "../responses/truquesaudavel.online/a";
-import { responseCTruqueSaudavel } from "../responses/truquesaudavel.online/c";
-import { responseBTruqueSaudavel } from "../responses/truquesaudavel.online/b";
 
 export class CloackerController {
 
@@ -10,27 +7,17 @@ export class CloackerController {
         const cloackerUtils = new CloackerUtils({
             validarMobile: true,
             validarParametrosDaUrl: true,
-            parametroParaValidar: 'c22-bac512',
-            validarReferencia: true,
-            referenciasPermitidas: ['facebook', 'instagram'],
-            validarIdiomasDoNavegador: false,
-            idiomasBloqueados: [],
-            validarIp: true,
-            paisesBloqueados: ['BR'],
-            utilizarDoisCloacker: true
+            parametroParaValidar: '91e9-28a'
         })
         cloackerUtils.validarDispositivoMobile(req)
         cloackerUtils.validarParametrosDaUrl(req)
-        cloackerUtils.validarReferencia(req)
-        cloackerUtils.validarIdiomasPermitidos(req)
-        await cloackerUtils.verificaIp(req)
         cloackerUtils.salvarFirebase()
         if (cloackerUtils.errors.length === 0)
-            res.json(responseATruqueSaudavel)
+            res.json({ page: 'truque-natural-visao.html' })
         else if (cloackerUtils.errors.length > 0 && cloackerUtils.errors.length <= 2)
-            res.json(responseCTruqueSaudavel)
+            res.json({ page: 'cha-anti-oculos.html' })
         else
-            res.json(responseBTruqueSaudavel)
+            res.json({ page: 'default.html' })
         return
     }
 }
