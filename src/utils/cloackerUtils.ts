@@ -47,14 +47,6 @@ export class CloackerUtils {
             })
             return
         }
-        const siteSourceName = parameters[4]
-        // && siteSourceName !== 'an' && siteSourceName !== 'msg' (caso comece a rodar no messanger ou no audience network)
-        if (siteSourceName !== 'fb' && siteSourceName !== 'ig') {
-            this.errors.push({
-                errorCode: 4,
-                msg: `Site Source Name inválido | ${src}`
-            })
-        }
     }
 
     salvarFirebase() {
