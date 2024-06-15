@@ -43,15 +43,14 @@ export class CloackerControllerLegacy {
             parametroParaValidar: 'c22-bac512',
             validarReferencia: false,
             referenciasPermitidas: [],
-            validarIdiomasDoNavegador: true,
+            validarIdiomasDoNavegador: false,
             idiomasBloqueados: [],
-            validarIp: false,
-            paisesBloqueados: [],
+            validarIp: true,
+            paisesBloqueados: ['BR'],
             utilizarDoisCloacker: false
         })
         cloackerUtils.validarDispositivoMobile(req)
         cloackerUtils.validarParametrosDaUrl(req)
-        cloackerUtils.validarReferencia(req)
         cloackerUtils.validarIdiomasPermitidos(req)
         await cloackerUtils.verificaIp(req)
         cloackerUtils.salvarFirebase()
