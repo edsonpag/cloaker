@@ -36,7 +36,7 @@ export class CloackerControllerLegacy {
         return
     }
 
-    async buenaSalud(req: Request, res: Response) {
+    async trucosNaturales(req: Request, res: Response) {
         const cloackerUtils = new CloackerUtilsLegacy({
             validarMobile: true,
             validarParametrosDaUrl: true,
