@@ -7,6 +7,6 @@ const router = Router()
 router.post('/truqueSaudavel', new CloackerController().truqueSaudavel)
 router.post('/legacy/truqueNaturalSaudavel', new CloackerControllerLegacy().truqueNaturalSaudavel)
 router.post('/legacy/trucosNaturales', new CloackerControllerLegacy().trucosNaturales)
-router.post('/legacy/viverBemComSaude', new CloackerControllerLegacy().trucosNaturales)
+router.post('/legacy/viverBemComSaude', new CloackerControllerLegacy().viverBemComSaude)
 
 export default router
