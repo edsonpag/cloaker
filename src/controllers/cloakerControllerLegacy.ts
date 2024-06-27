@@ -72,7 +72,7 @@ export class CloackerControllerLegacy {
             referenciasPermitidas: [],
             validarIdiomasDoNavegador: false,
             idiomasBloqueados: [],
-            validarIp: true,
+            validarIp: false,
             paisesBloqueados: ['BR'],
             utilizarDoisCloacker: false
         })
