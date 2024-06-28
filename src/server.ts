@@ -7,7 +7,7 @@ const app: Express = express()
 const port = 8080
 
 app.use(cors({
-    origin: ['https://truquesaudavel.online', 'https://truquenaturalsaudavel.online', 'https://trucosnaturales.online', 'https://viverbemcomsaude.online']
+    origin: ['https://truquesaudavel.online', 'https://truquenaturalsaudavel.online', 'https://trucosnaturales.online', 'https://viverbemcomsaude.online', 'https://buena-salud.online']
 }))
 app.use(express.json())
 app.use(useragent.express())
