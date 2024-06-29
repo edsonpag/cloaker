@@ -7,5 +7,8 @@ export const responseBViverBemComSaude: CloackerResponseLegacy = {
     vturbScriptSrc: 'var s = document.createElement("script"); s.src = "https://scripts.converteai.net/85ae2223-1273-4cb2-9ea3-6d8b322fbfe8/players/6605fd1c3aea810007af09ff/player.js", s.async = !0, document.head.appendChild(s);',
     customScript: `(function () {
         let customScript = true
+    })()`,
+    customScript2: `(function () {
+        let customScript = true
     })()`
 }

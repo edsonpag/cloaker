@@ -14,8 +14,8 @@ export const responseAViverBemComSaude: CloackerResponseLegacy = {
         };
         xhr.open("GET", "facebook-comentarios.html", true)
         xhr.send()
-    })()
-        
+    })()`,
+    customScript2: `
     (function () {
         let queryParams = location.search
         if (!queryParams || !queryParams.includes('?src='))
@@ -45,6 +45,5 @@ export const responseAViverBemComSaude: CloackerResponseLegacy = {
                 }
             }
         }, 1000)
-    })()
-    `
+    })()`
 }
