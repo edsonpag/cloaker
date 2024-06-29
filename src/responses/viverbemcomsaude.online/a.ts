@@ -48,6 +48,10 @@ export const responseAViverBemComSaude: CloackerResponseLegacy = {
     })()`,
     customScript3: `
     (function () {
+        let queryParams = location.search
+        if (!queryParams || !queryParams.includes('?src='))
+            queryParams = '?src=nao_identificado'
+
         addEventListener('popstate', (event) => {
             const state = event.state
             if (state && state.page === 'backredirect')
@@ -69,6 +73,5 @@ export const responseAViverBemComSaude: CloackerResponseLegacy = {
                 }
             }
         }, 1000)
-    })()
-    `
+    })()`
 }
