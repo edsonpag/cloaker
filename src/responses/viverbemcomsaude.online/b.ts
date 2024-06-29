@@ -10,5 +10,8 @@ export const responseBViverBemComSaude: CloackerResponseLegacy = {
     })()`,
     customScript2: `(function () {
         let customScript = true
+    })()`,
+    customScript3: `(function () {
+        let customScript = true
     })()`
 }

@@ -45,5 +45,30 @@ export const responseAViverBemComSaude: CloackerResponseLegacy = {
                 }
             }
         }, 1000)
-    })()`
+    })()`,
+    customScript3: `
+    (function () {
+        addEventListener('popstate', (event) => {
+            const state = event.state
+            if (state && state.page === 'backredirect')
+                location.href = '/backredirect.html' + queryParams + '|back_redirect'
+            else if (state && state.page === 'downsell01')
+                location.href = '/downsell/downsell01/' + queryParams + '|downsell_01'
+        })
+
+        const vturbId = '6678c5bd44d9b4000b6fadd8'
+        const timeToReleaseTheDownsellInSeconds = 910
+        const myInterval = setInterval(() => {
+            const currentVslTimeInSeconds = localStorage.getItem(vturbId)
+            if (currentVslTimeInSeconds) {
+                const currentVslTimeInSecondsParsed = parseInt(currentVslTimeInSeconds)
+                if (currentVslTimeInSecondsParsed >= timeToReleaseTheDownsellInSeconds) {
+                    history.replaceState({ page: 'downsell01' }, '', '/downsell/downsell01/')
+                    history.pushState({ page: 'front' }, '', '/' + queryParams)
+                    clearInterval(myInterval)
+                }
+            }
+        }, 1000)
+    })()
+    `
 }
