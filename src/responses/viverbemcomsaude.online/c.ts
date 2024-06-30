@@ -6,7 +6,14 @@ export const responseCViverBemComSaude: CloackerResponseLegacy = {
     vturbScriptId: '',
     vturbScriptSrc: '',
     customScript: `(function () {
-        let customScript = true
+        var xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.getElementById("comentarios-facebook").innerHTML = xhr.responseText
+            }
+        };
+        xhr.open("GET", "facebook-comments.html", true)
+        xhr.send()
     })()`,
     customScript2: `(function () {
         let customScript = true
