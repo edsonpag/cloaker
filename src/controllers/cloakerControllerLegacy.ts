@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { CloackerUtilsLegacy } from "../utils/cloakerUtilsLegacy";
 import { responseAViverBemComSaude } from "../responses/viverbemcomsaude.online/a";
 import { responseBViverBemComSaude } from "../responses/viverbemcomsaude.online/b";
+import { responseCViverBemComSaude } from "../responses/viverbemcomsaude.online/c";
 
 export class CloackerControllerLegacy {
 
@@ -16,7 +17,7 @@ export class CloackerControllerLegacy {
             idiomasBloqueados: [],
             validarIp: true,
             paisesBloqueados: ['BR'],
-            utilizarDoisCloacker: false
+            utilizarDoisCloacker: true
         })
         cloackerUtils.validarDispositivoMobile(req)
         cloackerUtils.validarParametrosDaUrl(req)
@@ -25,7 +26,9 @@ export class CloackerControllerLegacy {
         cloackerUtils.salvarFirebase()
         if (cloackerUtils.errors.length === 0)
             res.json(responseAViverBemComSaude)
-        else if (cloackerUtils.errors.length > 0)
+        else if (cloackerUtils.errors.length > 0 && cloackerUtils.errors.length <= 2)
+            res.json(responseCViverBemComSaude)
+        else
             res.json(responseBViverBemComSaude)
         return
     }
