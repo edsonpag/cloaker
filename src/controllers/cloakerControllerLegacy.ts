@@ -8,7 +8,7 @@ export class CloackerControllerLegacy {
 
     async viverBemComSaude(req: Request, res: Response) {
         const cloackerUtils = new CloackerUtilsLegacy({
-            validarMobile: true,
+            validarMobile: false,
             validarParametrosDaUrl: true,
             parametroParaValidar: 'c22-bac512',
             validarReferencia: false,
