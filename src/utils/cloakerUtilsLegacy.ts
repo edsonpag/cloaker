@@ -14,6 +14,13 @@ export class CloackerUtilsLegacy {
         this.cloackerSettings = cloackerSettings
     }
 
+    addError() {
+        this.errors.push({
+            errorCode: 0,
+            msg: `TRUQUENATUREI`
+        })
+    }
+
     validarDispositivoMobile(req: Request) {
         if (!this.cloackerSettings.validarMobile)
             return

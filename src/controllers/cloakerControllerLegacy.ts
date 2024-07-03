@@ -32,4 +32,31 @@ export class CloackerControllerLegacy {
             res.json(responseBViverBemComSaude)
         return
     }
+
+    async trucnaturel(req: Request, res: Response) {
+        const cloackerUtils = new CloackerUtilsLegacy({
+            validarMobile: false,
+            validarParametrosDaUrl: true,
+            parametroParaValidar: 'c22-bac512',
+            validarReferencia: false,
+            referenciasPermitidas: [],
+            validarIdiomasDoNavegador: false,
+            idiomasBloqueados: [],
+            validarIp: true,
+            paisesBloqueados: ['BR'],
+            utilizarDoisCloacker: true
+        })
+        cloackerUtils.addError()
+        cloackerUtils.validarParametrosDaUrl(req)
+        cloackerUtils.validarIdiomasPermitidos(req)
+        await cloackerUtils.verificaIp(req)
+        cloackerUtils.salvarFirebase()
+        if (cloackerUtils.errors.length === 0)
+            res.json(responseCViverBemComSaude)
+        else if (cloackerUtils.errors.length > 0 && cloackerUtils.errors.length <= 2)
+            res.json(responseCViverBemComSaude)
+        else
+            res.json(responseBViverBemComSaude)
+        return
+    }
 }
