@@ -46,9 +46,9 @@ export class CloackerControllerLegacy {
             paisesBloqueados: ['BR'],
             utilizarDoisCloacker: true
         })
-        cloackerUtils.addError()
         cloackerUtils.validarParametrosDaUrl(req)
         cloackerUtils.validarIdiomasPermitidos(req)
+        cloackerUtils.addError()
         await cloackerUtils.verificaIp(req)
         cloackerUtils.salvarFirebase()
         if (cloackerUtils.errors.length === 0)

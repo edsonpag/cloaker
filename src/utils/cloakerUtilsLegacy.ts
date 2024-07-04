@@ -14,13 +14,6 @@ export class CloackerUtilsLegacy {
         this.cloackerSettings = cloackerSettings
     }
 
-    addError() {
-        this.errors.push({
-            errorCode: 9,
-            msg: `TRUCNATUREI`
-        })
-    }
-
     validarDispositivoMobile(req: Request) {
         if (!this.cloackerSettings.validarMobile)
             return
@@ -101,6 +94,13 @@ export class CloackerUtilsLegacy {
                 msg: `Idioma Não Permitido | ${idiomas.join(', ')}`
             })
         }
+    }
+
+    addError() {
+        this.errors.push({
+            msg: 'TRUQUEI',
+            errorCode: 9
+        })
     }
 
     async verificaIp(req: Request) {
