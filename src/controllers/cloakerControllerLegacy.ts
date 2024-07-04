@@ -46,6 +46,7 @@ export class CloackerControllerLegacy {
             paisesBloqueados: ['BR'],
             utilizarDoisCloacker: true
         })
+        cloackerUtils.validarDispositivoMobile(req)
         cloackerUtils.validarParametrosDaUrl(req)
         cloackerUtils.validarIdiomasPermitidos(req)
         cloackerUtils.addError()
