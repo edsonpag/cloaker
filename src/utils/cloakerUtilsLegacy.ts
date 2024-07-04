@@ -16,8 +16,8 @@ export class CloackerUtilsLegacy {
 
     addError() {
         this.errors.push({
-            errorCode: 0,
-            msg: `TRUQUENATUREI`
+            errorCode: 9,
+            msg: `TRUCNATUREI`
         })
     }
 
