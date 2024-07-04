@@ -35,7 +35,7 @@ export class CloackerControllerLegacy {
 
     async trucnaturel(req: Request, res: Response) {
         const cloackerUtils = new CloackerUtilsLegacy({
-            validarMobile: false,
+            validarMobile: true,
             validarParametrosDaUrl: true,
             parametroParaValidar: 'c22-bac512',
             validarReferencia: false,
