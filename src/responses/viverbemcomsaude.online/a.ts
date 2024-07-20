@@ -32,7 +32,7 @@ export const responseAViverBemComSaude: CloackerResponseLegacy = {
                 location.href = '/downsell/downsell01/' + queryParams + '|downsell_01'
         })
 
-        const vturbId = '66908882fed57d000b958bd7'
+        const vturbId = '669b19312d16c7000b1f4873'
         const timeToReleaseTheDownsellInSeconds = 908
         const myInterval = setInterval(() => {
             const currentVslTimeInSeconds = localStorage.getItem(vturbId)
@@ -60,7 +60,7 @@ export const responseAViverBemComSaude: CloackerResponseLegacy = {
                 location.href = '/downsell/downsell01/' + queryParams + '|downsell_01'
         })
 
-        const vturbId = '66908882fed57d000b958bd7'
+        const vturbId = '669b19312d16c7000b1f4873'
         const timeToReleaseTheDownsellInSeconds = 908
         const myInterval = setInterval(() => {
             const currentVslTimeInSeconds = localStorage.getItem(vturbId)
