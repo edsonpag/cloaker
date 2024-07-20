@@ -15,7 +15,7 @@ export class CloackerControllerLegacy {
             referenciasPermitidas: [],
             validarIdiomasDoNavegador: false,
             idiomasBloqueados: [],
-            validarIp: false,
+            validarIp: true,
             paisesBloqueados: ['BR'],
             utilizarDoisCloacker: true
         })
