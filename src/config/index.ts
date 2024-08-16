@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { CloakerConfig } from '../interfaces/CloakerConfig'
 import { Request } from 'express'
+import { CloakerRequestBody } from '../interfaces/CloakerRequestBody'
 
 const loadCloakerConfigs = () => {
     const cloakersConfigDir = path.join(__dirname, './cloakers')
@@ -18,6 +19,7 @@ const loadCloakerConfigs = () => {
 
 export const getCloakerConfig = (req: Request): CloakerConfig => {
     const allConfigs = loadCloakerConfigs()
-    const cloakerId = req.body['d']
+    const cloakerRequestBody: CloakerRequestBody = req.body
+    const cloakerId = cloakerRequestBody.id
     return allConfigs[cloakerId]
 }
