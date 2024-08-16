@@ -30,7 +30,7 @@ export class CloakerService {
         this.checkReferrer()
         this.checkSiteSourceName()
         this.checkBrowserLanguage()
-        this.getVpnApiData()
+        await this.getVpnApiData()
         this.filterBlockedCountries()
         this.checkVpn()
         this.checkProxy()
