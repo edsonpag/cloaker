@@ -29,7 +29,7 @@ export class CloakerService {
         this.checkSecretCode()
         this.checkReferrer()
         this.checkSiteSourceName()
-        /*this.checkBrowserLanguage()
+        this.checkBrowserLanguage()
         await this.getVpnApiData()
         if (this.vpnApiData !== null) {
             this.filterBlockedCountries(this.vpnApiData)
@@ -38,7 +38,6 @@ export class CloakerService {
             this.checkRelay(this.vpnApiData)
             this.checkTor(this.vpnApiData)
         }
-        */
         this.saveErrorsInFirebase()
         return this.createCloakerResponse()
     }
