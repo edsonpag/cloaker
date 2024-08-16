@@ -31,11 +31,13 @@ export class CloakerService {
         this.checkSiteSourceName()
         this.checkBrowserLanguage()
         await this.getVpnApiData()
-        this.filterBlockedCountries()
-        this.checkVpn()
-        this.checkProxy()
-        this.checkRelay()
-        this.checkTor()
+        if (this.vpnApiData !== null) {
+            this.filterBlockedCountries(this.vpnApiData)
+            this.checkVpn(this.vpnApiData)
+            this.checkProxy(this.vpnApiData)
+            this.checkRelay(this.vpnApiData)
+            this.checkTor(this.vpnApiData)
+        }
         this.saveErrorsInFirebase()
         return this.createCloakerResponse()
     }
@@ -115,7 +117,6 @@ export class CloakerService {
         let browserLanguages = cloakerRequestBody.browserLanguages
         if (!browserLanguages || browserLanguages.length === 0)
             return this.firebaseService.addError("Não foi possível identificar o idioma do navegador")
-    
         browserLanguages = browserLanguages.filter((language: string) => this.cloakerConfig.blockedBrowserLanguages.indexOf(language) !== -1)
         if (browserLanguages.length > 0)
             return this.firebaseService.addError(`Idioma não permitido | ${browserLanguages.join(', ')}`)
@@ -125,53 +126,43 @@ export class CloakerService {
         this.vpnApiData = await requestApiData(this.req, this.firebaseService)
     }
     
-    private filterBlockedCountries = () => {
-        if (this.vpnApiData === null)
-            return
+    private filterBlockedCountries = (vpnApiData: VPNResponse) => {
         if(!this.cloakerConfig.filterCountries)
             return
-        const countryCode = this.vpnApiData.location.country_code
+        const countryCode = vpnApiData.location.country_code
         if (!countryCode)
             return this.firebaseService.addError('Country Code Não Encontrado')
         const isBlockedCountry = this.cloakerConfig.blockedCountries.includes(countryCode)
         if (isBlockedCountry)
-            this.firebaseService.addError(`Country Blocked | ${countryCode} | ${this.vpnApiData.ip}`)
+            this.firebaseService.addError(`Country Blocked | ${countryCode} | ${vpnApiData.ip}`)
     }
     
-    private checkVpn = () => {
-        if (this.vpnApiData === null)
-            return
+    private checkVpn = (vpnApiData: VPNResponse) => {
         if (!this.cloakerConfig.checkVpn)
             return
-        if (this.vpnApiData.security.vpn)
-            this.firebaseService.addError(`VPN DETECTADA | ${this.vpnApiData.ip}`)
+        if (vpnApiData.security.vpn)
+            this.firebaseService.addError(`VPN DETECTADA | ${vpnApiData.ip}`)
     }
     
-    private checkProxy = () => {
-        if (this.vpnApiData === null)
-            return
+    private checkProxy = (vpnApiData: VPNResponse) => {
         if (!this.cloakerConfig.checkProxy)
             return
-        if (this.vpnApiData.security.proxy)
-            this.firebaseService.addError(`PROXY DETECTADA | ${this.vpnApiData.ip}`)
+        if (vpnApiData.security.proxy)
+            this.firebaseService.addError(`PROXY DETECTADA | ${vpnApiData.ip}`)
     }
     
-    private checkRelay = () => {
-        if (this.vpnApiData === null)
-            return
+    private checkRelay = (vpnApiData: VPNResponse) => {
         if (!this.cloakerConfig.checkRelay)
             return
-        if (this.vpnApiData.security.relay)
-            this.firebaseService.addError(`RELAY DETECTADA | ${this.vpnApiData.ip}`)
+        if (vpnApiData.security.relay)
+            this.firebaseService.addError(`RELAY DETECTADA | ${vpnApiData.ip}`)
     }
     
-    private checkTor = () => {
-        if (this.vpnApiData === null)
-            return
+    private checkTor = (vpnApiData: VPNResponse) => {
         if (!this.cloakerConfig.checkTor)
             return
-        if (this.vpnApiData.security.tor)
-            this.firebaseService.addError(`TOR DETECTADO | ${this.vpnApiData.ip}`)
+        if (vpnApiData.security.tor)
+            this.firebaseService.addError(`TOR DETECTADO | ${vpnApiData.ip}`)
     }
 
     private saveErrorsInFirebase = () => {
