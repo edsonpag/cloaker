@@ -124,7 +124,7 @@ export class CloakerService {
     }
 
     private getVpnApiData = async () => {
-        this.vpnApiData = await requestApiData(this.req)
+        this.vpnApiData = await requestApiData(this.req, this.firebaseService)
     }
     
     private filterBlockedCountries = () => {

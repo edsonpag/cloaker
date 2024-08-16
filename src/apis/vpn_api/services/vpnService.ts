@@ -1,13 +1,13 @@
 import { Request } from "express";
 import requestIp from "request-ip"
 import { VPNResponse } from "../interfaces/VPNResponse";
-import { addError } from "../../firebase_api/firebaseConnection";
+import { FirebaseService } from "../../firebase_api/firebaseService";
 
 
-export const requestApiData = async (req: Request): Promise<VPNResponse | null> => {
+export const requestApiData = async (req: Request, firebaseService: FirebaseService): Promise<VPNResponse | null> => {
     const ip = requestIp.getClientIp(req)
     if (!ip) {
-        addError(`IP não encontrado`)
+        firebaseService.addError(`IP não encontrado`)
         return null
     }
     try {
@@ -15,7 +15,7 @@ export const requestApiData = async (req: Request): Promise<VPNResponse | null> 
         const data: VPNResponse = await response.json()
         return data
     } catch (error) {
-        addError(`Erro ao buscar dados na API da VPN | ${error}`)
+        firebaseService.addError(`Erro ao buscar dados na API da VPN | ${error}`)
         return null
     }
 }
