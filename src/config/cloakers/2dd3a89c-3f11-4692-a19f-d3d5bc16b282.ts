@@ -5,7 +5,7 @@ const config: CloakerConfig = {
     checkDesktop: true,
     checkBot: true,
     checkSecretCode: true,
-    secretCode: 'c22-bac512',
+    secretCode: 'bf6dad2c',
     checkReferrer: true,
     allowedReferrers: ['facebook', 'instagram'],
     checkSiteSourceName: true,
