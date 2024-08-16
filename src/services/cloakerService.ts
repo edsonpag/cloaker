@@ -65,9 +65,8 @@ export class CloakerService {
         const url = cloakerRequestBody.url
         if (!url)
             return this.firebaseService.addError('URL Inexistente para validação do Secret Code')
-        const decodedUrl = decodeURIComponent(url)
-        if (!decodedUrl.includes(this.cloakerConfig.secretCode))
-            this.firebaseService.addError(`Secret Code não informado na URL | ${decodedUrl}`)
+        if (!url.includes(this.cloakerConfig.secretCode))
+            this.firebaseService.addError(`Secret Code não informado na URL | ${url}`)
     }
 
     private checkReferrer = () => {
@@ -94,8 +93,7 @@ export class CloakerService {
         const url = cloakerRequestBody.url
         if (!url)
             return this.firebaseService.addError('URL Inexistente para Validação do Site Source Name')
-        const decodedUrl = decodeURIComponent(url)
-        const urlParts = decodedUrl.split("|")
+        const urlParts = url.split("|")
         if (urlParts.length >= 5) {
             let isAllowedSiteSourceName = false
             const siteSourceName = urlParts[4]
