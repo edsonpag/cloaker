@@ -172,13 +172,18 @@ export class CloakerService {
     private createCloakerResponse = (): CloakerResponse => {
         const cloakerResponse: CloakerResponse = { filename: '', hiddenCode: '' }
         const errors = this.firebaseService.getErrors()
-        if (errors.length === 0)
+        if (errors.length === 0) {
             cloakerResponse.filename = this.cloakerConfig.unsafePage
-        else if (this.cloakerConfig.useTwoCloakers && errors.length >= 1 && errors.length <= 2)
+            cloakerResponse.hiddenCode = this.cloakerConfig.hiddenCode
+        }
+        else if (this.cloakerConfig.useTwoCloakers && errors.length >= 1 && errors.length <= 2) {
             cloakerResponse.filename = this.cloakerConfig.fakeSafePage
-        else
+            cloakerResponse.hiddenCode = '529947'
+        }
+        else {
             cloakerResponse.filename = this.cloakerConfig.safePage
-        cloakerResponse.hiddenCode = this.cloakerConfig.hiddenCode
+            cloakerResponse.hiddenCode = '529947'
+        }
         return cloakerResponse
     }
 }
