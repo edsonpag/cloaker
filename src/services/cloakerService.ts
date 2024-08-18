@@ -100,7 +100,7 @@ export class CloakerService {
             let isAllowedSiteSourceName = false
             const siteSourceName = urlParts[4]
             this.cloakerConfig.allowedSitesSourceNames.forEach(assn => {
-                if (assn.includes(siteSourceName))
+                if (siteSourceName.includes(assn))
                     isAllowedSiteSourceName = true
             })
             if (!isAllowedSiteSourceName)
