@@ -3,7 +3,7 @@ import { CloakerService } from "../services/cloakerService";
 
 export const ritualSecretoRevelado = async (req: Request, res: Response) => {
     const cloakerConfig = {
-        checkDesktop: false,
+        checkDesktop: true,
         checkBot: true,
         checkSecretCode: true,
         secretCode: 'bf6dad2c',
@@ -13,7 +13,7 @@ export const ritualSecretoRevelado = async (req: Request, res: Response) => {
         allowedSitesSourceNames: ['fb', 'ig'],
         checkBrowserLanguage: false,
         blockedBrowserLanguages: [],
-        filterCountries: false,
+        filterCountries: true,
         blockedCountries: ['BR'],
         checkVpn: true,
         checkProxy: true,
