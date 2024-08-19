@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { getAllCloakerErrors, run } from './controllers/cloakerController'
+import cors from 'cors'
+import { ritualSecretoRevelado } from './controllers/cloakerController'
 
 const router = Router()
 
-router.post('/', run)
-router.get('/72de4316-d779-454a-8c24-1cd620c7683a', getAllCloakerErrors)
+router.post('/ritualsecretorevelado', cors({ origin: 'https://ritualsecretorevelado.online', optionsSuccessStatus: 200 }), ritualSecretoRevelado)
 
 export default router

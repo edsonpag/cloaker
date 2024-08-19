@@ -1,5 +1,4 @@
 export interface CloakerConfig {
-    cloakerId: string
     checkDesktop: boolean
     checkBot: boolean
     checkSecretCode: boolean

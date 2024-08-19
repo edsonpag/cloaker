@@ -1,5 +1,4 @@
 import { Request } from "express";
-import { getCloakerConfig } from "../config";
 import { requestApiData } from "../apis/vpn_api/services/vpnService";
 import { CloakerConfig } from "../interfaces/CloakerConfig";
 import { CloakerResponse } from "../interfaces/CloakerResponse";
@@ -17,9 +16,9 @@ export class CloakerService {
 
     vpnApiData: VPNResponse | null = null
 
-    constructor (req: Request) {
+    constructor (req: Request, cloakerConfig: CloakerConfig) {
         this.req = req
-        this.cloakerConfig = getCloakerConfig(req)
+        this.cloakerConfig = cloakerConfig
         this.firebaseService = new FirebaseService()
     }
 
@@ -30,8 +29,10 @@ export class CloakerService {
         this.checkReferrer()
         this.checkSiteSourceName()
         this.checkBrowserLanguage()
-        await this.getVpnApiData()
-        if (this.vpnApiData !== null) {
+        this.vpnApiData = await requestApiData(this.req)
+        if (this.vpnApiData === null)
+            this.firebaseService.addError(`Erro ao buscar dados na API da VPN`)
+        else {
             this.filterBlockedCountries(this.vpnApiData)
             this.checkVpn(this.vpnApiData)
             this.checkProxy(this.vpnApiData)
@@ -120,10 +121,6 @@ export class CloakerService {
         browserLanguages = browserLanguages.filter((language: string) => this.cloakerConfig.blockedBrowserLanguages.indexOf(language) !== -1)
         if (browserLanguages.length > 0)
             return this.firebaseService.addError(`Idioma não permitido | ${browserLanguages.join(', ')}`)
-    }
-
-    private getVpnApiData = async () => {
-        this.vpnApiData = await requestApiData(this.req, this.firebaseService)
     }
     
     private filterBlockedCountries = (vpnApiData: VPNResponse) => {

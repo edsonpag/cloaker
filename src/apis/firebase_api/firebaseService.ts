@@ -28,14 +28,4 @@ export class FirebaseService {
             errorsRef.add(errorsObj)
         }
     }
-
-    fetchAllErrors = async () => {
-        const errorsRef = db.collection('errors')
-        const snapshot = await errorsRef.get()
-        const allErrors: FirebaseFirestore.DocumentData[] = []
-        snapshot.forEach(doc => {
-            allErrors.push(doc.data())
-        })
-        return allErrors
-    }
 }

@@ -1,15 +1,31 @@
 import { Request, Response } from "express";
 import { CloakerService } from "../services/cloakerService";
-import { FirebaseService } from "../apis/firebase_api/firebaseService";
 
-export const run = async (req: Request, res: Response) => {
-    const cloakerService = new CloakerService(req)
+export const ritualSecretoRevelado = async (req: Request, res: Response) => {
+    const cloakerConfig = {
+        checkDesktop: true,
+        checkBot: true,
+        checkSecretCode: true,
+        secretCode: 'bf6dad2c',
+        checkReferrer: true,
+        allowedReferrers: ['facebook', 'instagram'],
+        checkSiteSourceName: true,
+        allowedSitesSourceNames: ['fb', 'ig'],
+        checkBrowserLanguage: false,
+        blockedBrowserLanguages: [],
+        filterCountries: true,
+        blockedCountries: ['BR'],
+        checkVpn: true,
+        checkProxy: true,
+        checkRelay: true,
+        checkTor: true,
+        useTwoCloakers: true,
+        unsafePage: '84e3ca0f.html',
+        safePage: 'default.html',
+        fakeSafePage: 'frequencia-sonora.html',
+        hiddenCode: '8c121c94'
+    }
+    const cloakerService = new CloakerService(req, cloakerConfig)
     const cloakerResponse = await cloakerService.executeCloakerValidations()
     return res.status(200).json(cloakerResponse)
-}
-
-export const getAllCloakerErrors = async (req: Request, res: Response) => {
-    const firebaseService = new FirebaseService()
-    const allErrors = await firebaseService.fetchAllErrors()
-    return res.status(200).json(allErrors)
 }
