@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { CloakerService } from "../services/cloakerService";
+import { CloakerConfig } from "../interfaces/CloakerConfig";
 
 export const ritualSecretoRevelado = async (req: Request, res: Response) => {
-    const cloakerConfig = {
+    const cloakerConfig: CloakerConfig = {
         checkDesktop: true,
         checkBot: true,
         checkSecretCode: true,
@@ -13,17 +14,13 @@ export const ritualSecretoRevelado = async (req: Request, res: Response) => {
         allowedSitesSourceNames: ['fb', 'ig'],
         checkBrowserLanguage: false,
         blockedBrowserLanguages: [],
-        filterCountries: true,
+        filterCountries: false,
         blockedCountries: ['BR'],
         checkVpn: true,
         checkProxy: true,
         checkRelay: true,
         checkTor: true,
-        useTwoCloakers: true,
-        unsafePage: '84e3ca0f.html',
-        safePage: 'default.html',
-        fakeSafePage: 'frequencia-sonora.html',
-        hiddenCode: '8c121c94'
+        useTwoCloakers: true
     }
     const cloakerService = new CloakerService(req, cloakerConfig)
     const cloakerResponse = await cloakerService.executeCloakerValidations()

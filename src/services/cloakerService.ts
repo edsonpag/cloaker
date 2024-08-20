@@ -1,10 +1,13 @@
 import { Request } from "express";
-import { requestApiData } from "../apis/vpn_api/services/vpnService";
 import { CloakerConfig } from "../interfaces/CloakerConfig";
 import { CloakerResponse } from "../interfaces/CloakerResponse";
 import { FirebaseService } from "../apis/firebase_api/firebaseService";
 import { CloakerRequestBody } from "../interfaces/CloakerRequestBody";
 import { VPNResponse } from "../apis/vpn_api/interfaces/VPNResponse";
+import { response0 } from "../responses/ritualSecretoRevelado/response0";
+import { response1 } from "../responses/ritualSecretoRevelado/response1";
+import { response2 } from "../responses/ritualSecretoRevelado/response2";
+import { requestApiData } from "../apis/vpn_api/services/vpnService";
 
 export class CloakerService {
 
@@ -167,20 +170,12 @@ export class CloakerService {
     }
     
     private createCloakerResponse = (): CloakerResponse => {
-        const cloakerResponse: CloakerResponse = { filename: '', hiddenCode: '' }
         const errors = this.firebaseService.getErrors()
-        if (errors.length === 0) {
-            cloakerResponse.filename = this.cloakerConfig.unsafePage
-            cloakerResponse.hiddenCode = this.cloakerConfig.hiddenCode
-        }
-        else if (this.cloakerConfig.useTwoCloakers && errors.length >= 1 && errors.length <= 2) {
-            cloakerResponse.filename = this.cloakerConfig.fakeSafePage
-            cloakerResponse.hiddenCode = '529947'
-        }
-        else {
-            cloakerResponse.filename = this.cloakerConfig.safePage
-            cloakerResponse.hiddenCode = '529947'
-        }
-        return cloakerResponse
+        if (errors.length === 0)
+            return response0
+        else if (this.cloakerConfig.useTwoCloakers && errors.length >= 1 && errors.length <= 2)
+            return response1
+        else
+            return response2
     }
 }

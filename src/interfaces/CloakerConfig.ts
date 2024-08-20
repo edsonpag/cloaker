@@ -16,8 +16,4 @@ export interface CloakerConfig {
     checkRelay: boolean
     checkTor: boolean
     useTwoCloakers: boolean
-    unsafePage: string
-    safePage: string
-    fakeSafePage: string
-    hiddenCode: string
 }
