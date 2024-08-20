@@ -1,7 +1,6 @@
 import { Request } from "express";
 import requestIp from "request-ip"
 import { VPNResponse } from "../interfaces/VPNResponse";
-import { FirebaseService } from "../../firebase_api/firebaseService";
 
 
 export const requestApiData = async (req: Request): Promise<VPNResponse | null> => {
