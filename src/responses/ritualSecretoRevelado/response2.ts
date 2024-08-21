@@ -5,5 +5,5 @@ export const response2: CloakerResponse = {
     vturbScriptId: `scr_66c02f9dda5246000c28ed24`,
     vturbScript: `var s=document.createElement("script"); s.src="https://scripts.converteai.net/85ae2223-1273-4cb2-9ea3-6d8b322fbfe8/players/66c02f9dda5246000c28ed24/player.js", s.async=!0,document.head.appendChild(s);`,
     headline: `Escute essa frequência sonora para atrair coisas boas em sua vida`,
-    customScript: `console.log("ok")`
+    customScript: `53b445c4-3b79.js`
 }
