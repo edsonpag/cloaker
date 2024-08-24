@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { ritualSecretoRevelado } from './controllers/cloakerController'
+import { CloackerController } from './controllers/cloackerController';
 
 const router = Router()
 
-router.post('/ritualsecretorevelado', ritualSecretoRevelado)
+router.post('/ritualsecretorevelado', new CloackerController().ritualsecretorevelado)
 
 export default router

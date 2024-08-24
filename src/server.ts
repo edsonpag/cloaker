@@ -1,6 +1,5 @@
 import express, { Express } from 'express'
 import cors from 'cors'
-import 'dotenv/config'
 import useragent from 'express-useragent'
 import routes from './routes'
 
