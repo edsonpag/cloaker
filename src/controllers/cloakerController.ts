@@ -12,6 +12,8 @@ export const ritualSecretoRevelado = async (req: Request, res: Response) => {
         allowedReferrers: ['facebook', 'instagram'],
         checkSiteSourceName: true,
         allowedSitesSourceNames: ['fb', 'ig'],
+        checkBrowserLanguage: false,
+        blockedBrowserLanguages: [],
         filterCountries: true,
         blockedCountries: ['BR'],
         checkVpn: true,

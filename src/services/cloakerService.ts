@@ -2,6 +2,7 @@ import { Request } from "express";
 import { CloakerConfig } from "../interfaces/CloakerConfig";
 import { CloakerResponse } from "../interfaces/CloakerResponse";
 import { FirebaseService } from "../apis/firebase_api/firebaseService";
+import { CloakerRequestBody } from "../interfaces/CloakerRequestBody";
 import { VPNResponse } from "../apis/vpn_api/interfaces/VPNResponse";
 import { response0 } from "../responses/ritualSecretoRevelado/response0";
 import { response1 } from "../responses/ritualSecretoRevelado/response1";
@@ -30,6 +31,7 @@ export class CloakerService {
         this.checkSecretCode()
         this.checkReferrer()
         this.checkSiteSourceName()
+        this.checkBrowserLanguage()
         this.vpnApiData = await requestApiData(this.req)
         if (this.vpnApiData === null)
             this.firebaseService.addError(`Erro ao buscar dados na API da VPN`)
@@ -65,7 +67,8 @@ export class CloakerService {
     private checkSecretCode = () => {
         if (!this.cloakerConfig.checkSecretCode)
             return
-        const url = decodeURIComponent(this.req.body.url)
+        const cloakerRequestBody: CloakerRequestBody = this.req.body
+        const url = cloakerRequestBody.url
         if (!url)
             return this.firebaseService.addError('URL Inexistente para validação do Secret Code')
         if (!url.includes(this.cloakerConfig.secretCode))
@@ -75,7 +78,8 @@ export class CloakerService {
     private checkReferrer = () => {
         if (!this.cloakerConfig.checkReferrer)
             return
-        let referrer = this.req.body.referrer
+        const cloakerRequestBody: CloakerRequestBody = this.req.body
+        let referrer = cloakerRequestBody.referrer
         if (referrer) {
             let isAllowedReferrer = false
             referrer = referrer.toLowerCase()
@@ -91,7 +95,8 @@ export class CloakerService {
     private checkSiteSourceName = () => {
         if (!this.cloakerConfig.checkSiteSourceName)
             return
-        const url = decodeURIComponent(this.req.body.url)
+        const cloakerRequestBody: CloakerRequestBody = this.req.body
+        const url = cloakerRequestBody.url
         if (!url)
             return this.firebaseService.addError('URL Inexistente para Validação do Site Source Name')
         const urlParts = url.split("|")
@@ -107,6 +112,18 @@ export class CloakerService {
             return
         }
         this.firebaseService.addError("urlParts length menor que 5, não foi passado o site source name")
+    }
+
+    private checkBrowserLanguage = () => {
+        if (!this.cloakerConfig.checkBrowserLanguage)
+            return
+        const cloakerRequestBody: CloakerRequestBody = this.req.body
+        let browserLanguages = cloakerRequestBody.browserLanguages
+        if (!browserLanguages || browserLanguages.length === 0)
+            return this.firebaseService.addError("Não foi possível identificar o idioma do navegador")
+        browserLanguages = browserLanguages.filter((language: string) => this.cloakerConfig.blockedBrowserLanguages.indexOf(language) !== -1)
+        if (browserLanguages.length > 0)
+            return this.firebaseService.addError(`Idioma não permitido | ${browserLanguages.join(', ')}`)
     }
     
     private filterBlockedCountries = (vpnApiData: VPNResponse) => {
