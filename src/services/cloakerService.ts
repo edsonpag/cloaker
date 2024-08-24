@@ -32,7 +32,6 @@ export class CloakerService {
         this.checkReferrer()
         this.checkSiteSourceName()
         this.checkBrowserLanguage()
-        /* 
         this.vpnApiData = await requestApiData(this.req)
         if (this.vpnApiData === null)
             this.firebaseService.addError(`Erro ao buscar dados na API da VPN`)
@@ -43,7 +42,6 @@ export class CloakerService {
             this.checkRelay(this.vpnApiData)
             this.checkTor(this.vpnApiData)
         }
-        */
         this.saveErrorsInFirebase()
         return this.createCloakerResponse()
     }
