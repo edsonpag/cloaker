@@ -7,8 +7,6 @@ export interface CloakerConfig {
     allowedReferrers: string[]
     checkSiteSourceName: boolean
     allowedSitesSourceNames: string[]
-    checkBrowserLanguage: boolean
-    blockedBrowserLanguages: string[]
     filterCountries: boolean
     blockedCountries: string[]
     checkVpn: boolean
