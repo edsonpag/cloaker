@@ -30,8 +30,7 @@ export class CloackerUtils {
     validarParametrosDaUrl(req: Request) {
         if (!this.cloackerSettings.validarParametrosDaUrl)
             return
-        const body = req.body
-        const url = body['a']
+        const url = req.body.a
         if (!url) {
             this.errors.push({
                 errorCode: 2,
