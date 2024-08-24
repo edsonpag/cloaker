@@ -22,7 +22,5 @@ export const ritualSecretoRevelado = async (req: Request, res: Response) => {
         checkTor: true,
         useTwoCloakers: true
     }
-    const cloakerService = new CloakerService(req, cloakerConfig)
-    const cloakerResponse = await cloakerService.executeCloakerValidations()
-    return res.status(200).json(cloakerResponse)
+    return res.status(200).json(new CloakerService(req, cloakerConfig).executeCloakerValidations())
 }
