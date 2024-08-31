@@ -26,4 +26,25 @@ export class CloackerController {
             res.json(response2)
         return
     }
+
+    async buenaSalud(req: Request, res: Response) {
+        const cloackerUtils = new CloackerUtils({
+            checkDesktop: true,
+            validarParametrosDaUrl: true,
+            parametroParaValidar: 'bf6dad2c',
+            validarIp: true,
+            paisesBloqueados: ['BR']
+        })
+        cloackerUtils.validarPc(req)
+        cloackerUtils.validarParametrosDaUrl(req)
+        await cloackerUtils.verificaIp(req)
+        cloackerUtils.salvarFirebase()
+        if (cloackerUtils.errors.length === 0)
+            res.json(response0)
+        else if (cloackerUtils.errors.length === 1 || cloackerUtils.errors.length === 2)
+            res.json(response1)
+        else
+            res.json(response2)
+        return
+    }
 }
