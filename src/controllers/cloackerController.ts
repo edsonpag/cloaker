@@ -6,6 +6,9 @@ import { response2 } from "../responses/viverbemcomsaude.online/c";
 import { buenaSalud0 } from "../responses/buenaSalud/a";
 import { buenaSalud1 } from "../responses/buenaSalud/b";
 import { buenaSalud2 } from "../responses/buenaSalud/c";
+import { viverbem0 } from "../responses/viverbemcom.online/a";
+import { viverbem1 } from "../responses/viverbemcom.online/b";
+import { viverbem2 } from "../responses/viverbemcom.online/c";
 
 export class CloackerController {
 
@@ -48,6 +51,27 @@ export class CloackerController {
             res.json(buenaSalud1)
         else
             res.json(buenaSalud2)
+        return
+    }
+
+    async viverBemComSaude(req: Request, res: Response) {
+        const cloackerUtils = new CloackerUtils({
+            checkDesktop: true,
+            validarParametrosDaUrl: true,
+            parametroParaValidar: 'bf6dad2c',
+            validarIp: true,
+            paisesBloqueados: ['BR']
+        })
+        cloackerUtils.validarPc(req)
+        cloackerUtils.validarParametrosDaUrl(req)
+        await cloackerUtils.verificaIp(req)
+        cloackerUtils.salvarFirebase()
+        if (cloackerUtils.errors.length === 0)
+            res.json(viverbem0)
+        else if (cloackerUtils.errors.length === 1 || cloackerUtils.errors.length === 2)
+            res.json(viverbem1)
+        else
+            res.json(viverbem2)
         return
     }
 }
