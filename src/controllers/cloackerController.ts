@@ -56,10 +56,10 @@ export class CloackerController {
 
     async viverBemComSaude(req: Request, res: Response) {
         const cloackerUtils = new CloackerUtils({
-            checkDesktop: true,
+            checkDesktop: false,
             validarParametrosDaUrl: true,
             parametroParaValidar: 'bf6dad2c',
-            validarIp: true,
+            validarIp: false,
             paisesBloqueados: ['BR']
         })
         cloackerUtils.validarPc(req)
