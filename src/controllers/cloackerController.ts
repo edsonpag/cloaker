@@ -1,14 +1,8 @@
 import { Request, Response } from "express";
 import { CloackerUtils } from "../utils/cloackerUtils";
-import { response0 } from "../responses/viverbemcomsaude.online/a";
-import { response1 } from "../responses/viverbemcomsaude.online/b";
-import { response2 } from "../responses/viverbemcomsaude.online/c";
-import { buenaSalud0 } from "../responses/buenaSalud/a";
-import { buenaSalud1 } from "../responses/buenaSalud/b";
-import { buenaSalud2 } from "../responses/buenaSalud/c";
-import { viverbem0 } from "../responses/viverbemcom.online/a";
-import { viverbem1 } from "../responses/viverbemcom.online/b";
-import { viverbem2 } from "../responses/viverbemcom.online/c";
+import { ritualSecretoRevelado0 } from "../responses/ritualsecretorevelado/a";
+import { ritualSecretoRevelado1 } from "../responses/ritualsecretorevelado/b";
+
 
 export class CloackerController {
 
@@ -16,7 +10,7 @@ export class CloackerController {
         const cloackerUtils = new CloackerUtils({
             checkDesktop: true,
             validarParametrosDaUrl: true,
-            parametroParaValidar: 'bf6dad2c',
+            parametroParaValidar: 'ct5ger',
             validarIp: true,
             paisesBloqueados: ['BR']
         })
@@ -25,53 +19,9 @@ export class CloackerController {
         await cloackerUtils.verificaIp(req)
         cloackerUtils.salvarFirebase()
         if (cloackerUtils.errors.length === 0)
-            res.json(response0)
-        else if (cloackerUtils.errors.length === 1 || cloackerUtils.errors.length === 2)
-            res.json(response1)
+            res.json(ritualSecretoRevelado0)
         else
-            res.json(response2)
-        return
-    }
-
-    async buenaSalud(req: Request, res: Response) {
-        const cloackerUtils = new CloackerUtils({
-            checkDesktop: true,
-            validarParametrosDaUrl: true,
-            parametroParaValidar: 'bf6dad2c',
-            validarIp: true,
-            paisesBloqueados: ['BR']
-        })
-        cloackerUtils.validarPc(req)
-        cloackerUtils.validarParametrosDaUrl(req)
-        await cloackerUtils.verificaIp(req)
-        cloackerUtils.salvarFirebase()
-        if (cloackerUtils.errors.length === 0)
-            res.json(buenaSalud0)
-        else if (cloackerUtils.errors.length === 1 || cloackerUtils.errors.length === 2)
-            res.json(buenaSalud1)
-        else
-            res.json(buenaSalud2)
-        return
-    }
-
-    async viverBemComSaude(req: Request, res: Response) {
-        const cloackerUtils = new CloackerUtils({
-            checkDesktop: true,
-            validarParametrosDaUrl: true,
-            parametroParaValidar: 'bf6dad2c',
-            validarIp: true,
-            paisesBloqueados: ['BR']
-        })
-        cloackerUtils.validarPc(req)
-        cloackerUtils.validarParametrosDaUrl(req)
-        await cloackerUtils.verificaIp(req)
-        cloackerUtils.salvarFirebase()
-        if (cloackerUtils.errors.length === 0)
-            res.json(viverbem0)
-        else if (cloackerUtils.errors.length === 1 || cloackerUtils.errors.length === 2)
-            res.json(viverbem1)
-        else
-            res.json(viverbem2)
+            res.json(ritualSecretoRevelado1)
         return
     }
 }
