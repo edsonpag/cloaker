@@ -1,4 +1,4 @@
 export interface CloakerResponse {
-    checkoutLink: string
-    filename: string
+    l: string
+    f: string
 }
