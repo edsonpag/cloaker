@@ -11,7 +11,7 @@ export class CloackerController {
             checkDesktop: true,
             validarParametrosDaUrl: true,
             parametroParaValidar: 'ct5ger',
-            validarIp: false,
+            validarIp: true,
             paisesBloqueados: ['BR']
         })
         cloackerUtils.validarPc(req)
