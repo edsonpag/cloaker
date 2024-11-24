@@ -1,4 +1,4 @@
-export const ritualSecretoRevelado1 = {
+export const ritualSecretoRevelado2 = {
     headline: ``,
     vturb: ``,
     customContent: 'af354321.js'

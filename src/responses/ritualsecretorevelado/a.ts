@@ -1,5 +1,5 @@
-import { CloakerResponse } from "../../interfaces/cloakerResponse.interface";
-
-export const ritualSecretoRevelado0: CloakerResponse = {
-    l: 'https://eceducation.mycartpanda.com/checkout/151908219:1'
+export const ritualSecretoRevelado0 = {
+    headline: `Nur diese <span class="green-highlight">3 Zutaten</span> in der Wasser für 2 Tage, und ich bin ohne Probleme mit meinen Augen aufgewacht ... <span class="green-highlight">(siehe unten!)</span>`,
+    vturb: `<div id="vid_674381223c99d8000b127e0f" style="position: relative; width: 100%; padding: 56.25% 0 0;"> <img id="thumb_674381223c99d8000b127e0f" src="https://images.converteai.net/85ae2223-1273-4cb2-9ea3-6d8b322fbfe8/players/674381223c99d8000b127e0f/thumbnail.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" alt="thumbnail"> <div id="backdrop_674381223c99d8000b127e0f" style=" -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); position: absolute; top: 0; height: 100%; width: 100%; "></div> </div> <script type="text/javascript" id="scr_674381223c99d8000b127e0f"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/85ae2223-1273-4cb2-9ea3-6d8b322fbfe8/players/674381223c99d8000b127e0f/player.js", s.async=!0,document.head.appendChild(s); </script> <style> .elementor-element:has(#smartplayer) { width: 100%; } </style>`,
+    customContent: 'b0a54dc2.js'
 }
