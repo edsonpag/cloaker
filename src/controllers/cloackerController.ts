@@ -9,8 +9,8 @@ export class CloackerController {
 
     async ritualsecretorevelado(req: Request, res: Response) {
         const cloackerUtils = new CloackerUtils({
-            checkDesktop: true,
-            validarParametrosDaUrl: true,
+            checkDesktop: false,
+            validarParametrosDaUrl: false,
             parametroParaValidar: '1de2f342',
             validarIp: false,
             paisesBloqueados: ['BR']
