@@ -12,7 +12,7 @@ export class CloackerController {
             checkDesktop: false,
             validarParametrosDaUrl: true,
             parametroParaValidar: '1de2f342',
-            validarIp: true,
+            validarIp: false,
             paisesBloqueados: ['BR']
         })
         cloackerUtils.validarPc(req)
